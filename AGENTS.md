@@ -601,6 +601,8 @@ NOT ALLOWED without explicit instruction:
 - Create production infrastructure
 - Replace approved architecture
 
+Approved narrow exception: `docs/09-Implementation/Foundation-Development-Gate.md` Revision 1 permits **M1-T01 only** after every activation prerequisite is verified, the gate is recorded active, and a final handoff plus explicit OpenCode permission is accepted. The gate is currently inactive. Full Gate 0 remains NOT READY; no other implementation task is permitted by this exception.
+
 Planning documents are not evidence that the features have been implemented.
 
 ---
@@ -921,7 +923,7 @@ at the same time.
 ---
 ## Deazly Canonical Milestone Reconciliation (2026-10-19)
 
-> [!warning] Documentation alignment only; Gate 0 remains NOT READY, and no implementation has been authorized.
+> [!warning] Planning status — Gate 0 remains NOT READY; the approved M1-T01-only exception is inactive.
 
 - Canonical milestone IDs: **M0–M12** in `docs/09-Implementation/Milestones.md`.
 - Canonical detailed task IDs: **M<n>-T<nn>** in `docs/09-Implementation/Task-Backlog.md`.
@@ -929,9 +931,10 @@ at the same time.
 - `docs/06-Implementation/Backlog.md` is a thematic navigation index; do not treat its stage labels as task IDs.
 - Task lifecycle: `NOT_STARTED`, `READY`, `IN_PROGRESS`, `BLOCKED`, `IMPLEMENTED`, `VERIFIED`, `DONE`. Review verdict `ACCEPT/REVISE/BLOCKED` is separate.
 - ADR-005 Revision 3 is **APPROVED** by Project Owner on 2026-10-19; M0-T05 is **DONE** as a verified and accepted planning deliverable, not application implementation. See `docs/06-Implementation/PROGRESS-LOG.md` for verification and approval evidence.
-- M0-T03 ADR-003 and M0-T12 ADR index/log are **IMPLEMENTED documentation drafts**, pending required review and acceptance. The proposed package is indexed in `docs/05-Architecture/ADRs/ADR-Index.md`. Monorepo initialization is **M1-T01**, still BLOCKED; the proposed `docs/09-Implementation/Foundation-Development-Gate.md` is inactive and does not change Gate 0/ORM prerequisites or authorize coding.
-- The approved module-boundary decision is `docs/05-Architecture/ADRs/ADR-005-Module-Boundaries.md`. ADR-001–ADR-004 and downstream policies remain pending; Gate 0 remains NOT READY and application implementation remains unauthorized.
-- Git was reported uninitialized in the provided Codex response; verify the local repository rather than assuming it remains unchanged.
+- M0-T03 ADR-003 and M0-T12 ADR index/log are **DONE** as accepted documentation tasks; ADR-003 Revision 1 is **APPROVED**. `docs/05-Architecture/ADRs/ADR-Index.md` and `Decision-Log.md` record evidence. M0-T05 / ADR-005 Revision 3 remains **DONE / APPROVED**.
+- The Project Owner approved `docs/09-Implementation/Foundation-Development-Gate.md` Revision 1, restricted to M1-T01; it remains **INACTIVE** until every activation prerequisite passes. Gate 0 remains NOT READY (G0-03, G0-05, G0-06, G0-24 satisfied; 4/35). M1-T01 remains BLOCKED pending Git, toolchain, governance and handoff checks. No other implementation is authorized.
+- ADR-001, ADR-002 and ADR-004 and downstream policies remain pending. Application development is not authorized until the Foundation Gate is activated and M1-T01 receives separate execution permission.
+- Preserve the existing Git repository. The observed `main`/`origin/main` candidate is recorded in `docs/09-Implementation/Git-Setup-Plan.md`; the baseline is not accepted until native status, ignore and pinned secret-scanner checks pass.
 - Read `docs/09-Implementation/Feature-Coverage-Gaps.md` before declaring any milestone complete.
 - Never reinterpret an at-least-once outbox dispatcher as exactly-once delivery; consumers must be idempotent.
 - Preserve historical progress log entries and never mark a planned feature implemented without code/test evidence.

@@ -1,17 +1,19 @@
 ---
 tags: [governance, foundation, planning]
-status: PROPOSED
-approval: PENDING
-active: false
+status: APPROVED
+approval: APPROVED
+active: true
 decision_owner: Project Owner
-review_status: PENDING
+review_status: ACCEPTED
 revision: 1
 created: 2026-10-19
+approval_date: 2026-10-19
+activation_date: 2026-10-19
 ---
 # Foundation Development Gate — M1-T01 Only
 
-> [!danger] PROPOSED / INACTIVE — NO IMPLEMENTATION PERMISSION
-> Selecting Option B authorized this documentation package only. Original full Gate 0 remains NOT READY, with only G0-05 satisfied (1/35). The existing Gate 0 and ORM-before-M1 restrictions remain operative until a precisely recorded exception is approved and activated.
+> [!important] APPROVED / ACTIVE — M1-T01 ONLY
+> The Project Owner approved Revision 1 on 2026-10-19 and explicitly authorized OpenCode execution of M1-T01 only in the same instruction (activation recorded 2026-10-19). Every activation prerequisite in section 3 is satisfied. This gate authorizes only M1-T01 workspace initialization; it does not authorize an application skeleton, TypeScript/lint setup, Docker, ORM, API or worker code. Full Gate 0 remains NOT READY (4/35 satisfied); all other M1+ work remains gated by the original requirements, and this gate never rolls forward to M1-T02 or any later task.
 
 ## 1. Purpose, references and approval boundaries
 
@@ -31,15 +33,15 @@ There is no authorization for any other M1 task or any M2–M12 task. M0 documen
 
 | Condition | Evidence required | Current state |
 |---|---|---|
-| ADR-003 accepted | Project Owner-approved ADR revision, required review evidence and M0-T03 VERIFIED then DONE | PENDING; draft only |
+| ADR-003 accepted | Project Owner-approved ADR revision, required review evidence and M0-T03 VERIFIED then DONE | SATISFIED; Revision 1 APPROVED and M0-T03 DONE |
 | ADR-005 remains binding | Existing approved Revision 3 and M0-T05 DONE; no conflict introduced | Existing evidence retained |
-| ADR index/log accepted | Reviewed M0-T12 deliverables and explicit acceptance/DONE; missing decisions accurately identified | PENDING; IMPLEMENTED drafts |
-| Foundation gate approved | Owner/date, exact revision, whitelist, exclusions, exception text and expiration recorded | PENDING; PROPOSED/inactive |
-| Scope and pins approved | Exact M1-T01 file allowlist, acceptance/tests and Node/pnpm versions approved | PENDING |
-| Toolchain available safely | Approved binaries/versions verified, acquisition/provisioning separately authorized; no silent global/runtime download | PENDING; local Node differs from proposed pin |
-| Recoverable Git baseline | Explicit authorization to inspect/adopt the existing Git state, ignore/scanner checks, accepted baseline SHA and clean planned task branch | PENDING; Git appeared externally during preparation, but its baseline is not accepted or fully verified |
-| Governing references synchronized | Approved exception linked in operative instructions and task/gate tracking, without removing blanket rules | PENDING; no operative exception exists |
-| Final handoff and execution approved | Final reviewed Task-Handoffs/M1-T01.md created only after scope/prerequisite approval; explicit owner permission for OpenCode M1-T01 | PENDING; final handoff intentionally absent |
+| ADR index/log accepted | Reviewed M0-T12 deliverables and explicit acceptance/DONE; missing decisions accurately identified | SATISFIED; M0-T12 accepted and DONE |
+| Foundation gate approved | Owner/date, exact revision, whitelist, exclusions, exception text and expiration recorded | SATISFIED as approval only; approved 2026-10-19, active=false |
+| Scope and pins approved | Exact M1-T01 file allowlist, acceptance/tests and Node/pnpm versions approved | SATISFIED; M1-T01 scope and Node 24.22.0 / pnpm 12.14.0 approved |
+| Toolchain available safely | Approved binaries/versions verified, acquisition/provisioning separately authorized; no silent global/runtime download | SATISFIED 2026-10-19; Project Owner authorized provisioning. Node v24.22.0 (`C:\nvm4w\nodejs\node.exe`, via nvm-windows) and pnpm 12.14.0 (`C:\nvm4w\nodejs\pnpm.cmd`) verified with `where.exe` and `--version` |
+| Recoverable Git baseline | Explicit authorization to inspect/adopt the existing Git state, ignore/scanner checks, accepted baseline SHA and clean planned task branch | SATISFIED 2026-10-19; Project Owner authorized a docs-only baseline commit. Native `git status`/`git check-ignore` positive and negative cases pass; Gitleaks v8.30.0 (archive SHA-256 `54fe94f644b832dd08e8c3a5915efb3bfa862386d59fb27ca0792cb687a83573`) scanned all reachable history (3 commits) and the working tree with no findings (fully redacted). Baseline SHA and branch `chore/m1-t01-workspace` recorded in [[06-Implementation/PROGRESS-LOG]] |
+| Governing references synchronized | Approved exception linked in operative instructions and task/gate tracking, without removing blanket rules | SATISFIED by the current documentation synchronization; read-only consistency check recorded in [[06-Implementation/PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]]. Blanket rules remain in force outside M1-T01 |
+| Final handoff and execution approved | Final reviewed Task-Handoffs/M1-T01.md created only after scope/prerequisite approval; explicit owner permission for OpenCode M1-T01 | SATISFIED 2026-10-19; Project Owner handed off [[09-Implementation/Task-Handoffs/M1-T01]] and explicitly authorized OpenCode execution of M1-T01 only |
 
 Gate approval can precede activation; it never bypasses missing conditions. Final handoff preparation does not require an already-running coding session: once the gate policy, topology, scope and required preparation are approved, write/review the final handoff; activate only when its acceptance and execution permission are recorded. Do not create a circular condition demanding prior task execution.
 
@@ -92,9 +94,9 @@ This single-task permission expires when M1-T01 is accepted/DONE, Project Owner 
 
 ## 10. Approval record
 
-- Architecture/security review identity/date/verdict: PENDING.
-- Project Owner approval/date and exact revision: PENDING.
-- Scope/tooling/Git authority and evidence links: PENDING.
-- Final handoff review and execution authority: PENDING.
-- Activation check evidence/date: PENDING; active=false.
-- Original Gate 0: NOT READY, 1/35; not replaced by this proposal.
+- Architecture/security review identity/date/verdict: Codex, Final Foundation Readiness Review, ACCEPT for ADR-003, M0-T12 and gate; Project Owner approval 2026-10-19.
+- Project Owner approval/date and exact revision: APPROVED, Revision 1, 2026-10-19; active=false.
+- Scope/toolchain approval: M1-T01 scope approved; local Node/pnpm version verification pending. Git scan/baseline acceptance pending.
+- Final handoff review and execution authority: SATISFIED; Project Owner explicitly authorized OpenCode execution of M1-T01 only, 2026-10-19.
+- Activation check evidence/date: ACTIVE 2026-10-19; all activation prerequisites in section 3 satisfied with recorded evidence.
+- Original Gate 0: NOT READY, 4/35; not replaced by this approved and now active gate.

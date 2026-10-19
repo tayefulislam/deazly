@@ -64,6 +64,5 @@ This backlog is the thematic summary. Use the following for executable detail:
 - [[09-Implementation/Task-Backlog]] — granular task IDs, sizes, dependencies and status.
 - [[09-Implementation/Readiness-Checklist]] — verifiable gate items with evidence.
 
-> [!warning] Do not start Stage 0 scaffolding yet
-> Gate 0 is not signed off. ADR-001 (auth), ADR-002 (ORM), the RBAC matrix, and the
-> unresolved policies in [[01-Product/Decision-Register]] are still blocking.
+> [!warning] Foundation Development Gate approved but inactive
+> Full Gate 0 remains NOT READY. Only M1-T01 may proceed after all activation prerequisites in [[09-Implementation/Foundation-Development-Gate]] are verified and the final handoff/execution is approved. ADR-001 (auth), ADR-002 (ORM), the RBAC matrix and unresolved policies still block the dependent business and database work.

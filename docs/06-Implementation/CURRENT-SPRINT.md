@@ -2,56 +2,56 @@
 type: current-sprint
 project: multi-vendor-marketplace
 phase: PLANNING
-active_milestone: M0
-active_task: null
-last_completed_task: M0-T05
+active_milestone: M1
+active_task: M1-T01
+last_completed_task: M0-T12
 last_completed_task_status: DONE
-planning_tasks_awaiting_review: [M0-T03, M0-T12]
+planning_tasks_awaiting_review: []
 documentation_package_authorized: true
-foundation_gate_approved: false
+foundation_gate_approved: true
+foundation_gate_active: true
 git_initialization_approved: false
-next_candidate_task: M0-T03
-next_candidate_task_status: IMPLEMENTED
+next_candidate_task: M1-T02
+next_candidate_task_status: BLOCKED
 next_candidate_authorized: false
-implementation_approved: false
+implementation_approved: true
+handoff_status: AUTHORIZED
 last_updated: 2026-10-19
 ---
 
 # Marketplace — Current Sprint
 
 > [!important]
-> This project is in the planning phase.
-> No application coding task is currently authorized.
+> The M1-T01-only Foundation Development Gate is **ACTIVE** and OpenCode execution of M1-T01 is authorized (Project Owner, 2026-10-19).
+> No M1-T02 or later task is authorized. Full Gate 0 remains NOT READY (4/35).
 
 ## Current Milestone
 
-M0 — Decisions and architecture records
+M1 — Platform foundation (only M1-T01 authorized)
 
-Status: NOT_STARTED
+Status: IN_PROGRESS
 
 ## Active Task
 
-None executing. The authorized documentation package is drafted: M0-T03 and M0-T12 are IMPLEMENTED pending required review, verification and acceptance. M0-T05 remains DONE and ADR-005 Revision 3 remains APPROVED. No application coding task is active.
+M1-T01 — Initialize pnpm workspace (`apps/*`, `packages/*` per ADR-003). Authorized 2026-10-19. Toolchain verified (Node 24.22.0 / pnpm 12.14.0); Gitleaks v8.30.0 scan clean; docs-only baseline committed; task branch `chore/m1-t01-workspace`. Workspace manifests, workspace test and lockfile under implementation.
 
 ## Next Candidate Task
 
-**Review M0-T03 — ADR-003, M0-T12 — ADR index/log, and the Foundation Development Approval Package**
+**M1-T02 — Add TypeScript strict config (BLOCKED, not authorized)**
 
-Task statuses: M0-T03 IMPLEMENTED; M0-T12 IMPLEMENTED. These are proposed documentation deliverables, not approved decisions. Author structural checks do not advance them to VERIFIED or DONE.
+M1-T02 and all later tasks remain BLOCKED behind full Gate 0 and the M0-T02 ORM decision. The active M1-T01 gate never rolls forward.
 
-Authorization: user's Foundation Development Approval Package request permits documentation drafting, author verification and relevant planning tracking only. It does not approve ADR-003, the index/log or foundation gate, and grants no Git/tool provisioning or coding permission.
+Authorization: OpenCode execution authorized for **M1-T01 only**. No other implementation task is authorized. Git baseline checks, toolchain verification and the Gitleaks scan are now satisfied; see [[PROGRESS-LOG]].
 
-Completed planning record: M0-T05 transitioned IMPLEMENTED → VERIFIED → DONE on 2026-10-19; ADR-005 Revision 3 is APPROVED. Evidence: [[PROGRESS-LOG#M0-T05 approval evidence]]. Gate 0 remains NOT READY (G0-05 only satisfied, 1/35).
+Completed planning records: M0-T03, M0-T05 and M0-T12 are DONE; ADR-003 Revision 1 and ADR-005 Revision 3 are APPROVED. Gate 0 remains NOT READY (G0-03, G0-05, G0-06 and G0-24 satisfied, 4/35). Evidence: [[PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]] and [[PROGRESS-LOG#M0-T05 approval evidence]].
 
 ## Task Objective
 
-M0-T05's documentation objective is complete: [[05-Architecture/ADRs/ADR-005-Module-Boundaries]] Revision 3 is verified and explicitly accepted. Historical findings and unresolved downstream decisions remain recorded; approval does not certify runtime behavior or application implementation.
+M1-T01 — initialize a private, reproducible, dependency-free pnpm workspace at the repository root with six app placeholders (`storefront`, `vendor`, `admin`, `warehouse`, `api`, `worker`) and five shared package placeholders (`database`, `ui`, `contracts`, `validation`, `config`), plus a meaningful Node built-in workspace test. No application framework, TypeScript, ORM, API, worker, UI or database code is in scope.
 
-Current draft references: [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]], [[05-Architecture/ADRs/ADR-Index]], [[05-Architecture/ADRs/Decision-Log]], [[09-Implementation/Foundation-Development-Gate]], [[09-Implementation/M1-T01-Scope-Proposal]], [[09-Implementation/Git-Setup-Plan]]. Next action: required architecture/security review and explicit Project Owner artifact acceptance. No approved implementation handoff is created.
+Current approved references: [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]], [[05-Architecture/ADRs/ADR-Index]], [[05-Architecture/ADRs/Decision-Log]], [[09-Implementation/Foundation-Development-Gate]] (ACTIVE, M1-T01 only), [[09-Implementation/M1-T01-Scope-Proposal]] and [[09-Implementation/Task-Handoffs/M1-T01]] (AUTHORIZED).
 
-**Implementation task M1-T01 is BLOCKED until Gate 0 approval.**
-
-An M1-T01-only exception has been drafted, not activated. Original Gate 0 and the blanket ORM prerequisite remain effective unless the owner approves the precise exception and all activation conditions are evidenced. M0-T03's explicit dependency is not waived.
+**M1-T01 is authorized and in progress. Full Gate 0 remains NOT READY. No later task is authorized and the M1-T01 gate never rolls forward.**
 
 ## Prerequisites
 
@@ -64,13 +64,9 @@ An M1-T01-only exception has been drafted, not activated. Original Gate 0 and th
 
 ## Active Task Checklist
 
-No implementation task is active.
-
-When a task is authorized, replace this section with:
-
-- [ ] Requirements reviewed
-- [ ] Dependencies verified
-- [ ] Implementation plan prepared
+- [x] Requirements reviewed
+- [x] Dependencies verified
+- [x] Implementation plan prepared
 - [ ] Code changes completed
 - [ ] Tests executed
 - [ ] Acceptance criteria verified
@@ -79,8 +75,8 @@ When a task is authorized, replace this section with:
 
 ## Blockers
 
-- Gate 0 and remaining project planning decisions not yet approved; ADR-005 alone approved
-- Foundation setup not authorized
+- Full Gate 0 remains NOT READY (4/35); other ADRs and business decisions remain pending.
+- M1-T02 and all later tasks remain BLOCKED; only M1-T01 is authorized by the active gate.
 
 ## Next Task Selection Policy
 

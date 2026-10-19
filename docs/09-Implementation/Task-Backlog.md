@@ -6,7 +6,7 @@ created: 2026-10-19
 # Task Backlog — AI-Agent Executable Units
 
 > [!danger] Planning only
-> **No application task is started or complete.** M0-T05 is DONE as an approved planning deliverable; other proposals remain unapproved. All statuses must use the canonical implementation vocabulary.
+> **No application task is started or complete.** M0-T03, M0-T05 and M0-T12 are DONE as accepted planning deliverables; ADR-003 and ADR-005 are approved, and the Foundation Gate is approved but inactive. All statuses must use the canonical implementation vocabulary.
 > Do not mark a task `DONE` from code generation alone. `DONE` requires the acceptance criteria and test evidence.
 > This file expands [[06-Implementation/Backlog]] into units small enough for one agent session.
 
@@ -50,7 +50,7 @@ For the audit history and previous `TODO` / `REVIEW` values see [[09-Implementat
 |---|---|---|---|---|---|---|
 | M0-T01 | Write ADR-001 authentication architecture: session vs OIDC, cookie strategy, CSRF, MFA, guest access tokens, session revocation | P0 | M | — | BLOCKED | decision |
 | M0-T02 | Write ADR-002 ORM selection: Prisma vs Drizzle scored on migrations, raw SQL/locking, partial indexes, JSONB, transactions, type safety, tooling | P0 | M | — | BLOCKED | decision |
-| M0-T03 | Write ADR-003 deployment topology: number of frontends, finance app vs admin route, cookie domains, CI matrix | P0 | S | — | IMPLEMENTED | Documentation-only revision 1 drafted 2026-10-19 under explicit authorization: [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]] PROPOSED; author checks only; required review, verification, acceptance and approval PENDING; not coding permission |
+| M0-T03 | Write ADR-003 deployment topology: number of frontends, finance app vs admin route, cookie domains, CI matrix | P0 | S | — | DONE | ADR-003 Revision 1 APPROVED by Project Owner 2026-10-19 after final review ACCEPT; IMPLEMENTED → VERIFIED → DONE; G0-03 and G0-24 satisfied; evidence [[06-Implementation/PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]]; no coding permission |
 | M0-T04 | Write ADR-004 money and rounding: minor units, commission rounding, residual allocation, tax base, FX stance | P0 | M | — | BLOCKED | BR-14, BR-13 |
 | M0-T05 | Write ADR-005 module boundaries: allowed imports, shared kernel, read-model rules, lint enforcement plan | P0 | M | — | DONE | IMPLEMENTED → VERIFIED → DONE on 2026-10-19; Revision 3 documentation checks and final ACCEPT review accepted by Project Owner; ADR-005 APPROVED and task closure explicitly authorized; evidence in [[06-Implementation/PROGRESS-LOG#M0-T05 approval evidence]]; no application implementation |
 | M0-T06 | Produce RBAC permission matrix: role × permission × scope predicate, reconciling role vocabulary conflicts | P0 | M | — | BLOCKED | C-08 |
@@ -59,7 +59,7 @@ For the audit history and previous `TODO` / `REVIEW` values see [[09-Implementat
 | M0-T09 | Record Gate 0 policy decisions (country, seller-of-record, tax mode, COD remittance, payout cadence, returns window, negative payable, gateway) | P0 | M | — | BLOCKED | business |
 | M0-T10 | Define performance budgets and capacity targets (SKU count, orders/day, p95 latency, sync throughput) | P1 | S | — | NOT_STARTED | Planning candidate; approval pending |
 | M0-T11 | Define PII classification matrix and log-redaction rules | P0 | M | — | NOT_STARTED | Planning candidate; approval pending |
-| M0-T12 | Create ADR index and decision log with owner/date fields | P1 | S | — | IMPLEMENTED | Documentation-only drafts delivered 2026-10-19: [[05-Architecture/ADRs/ADR-Index]] and [[05-Architecture/ADRs/Decision-Log]]; ADR-005 evidence retained; author checks only; required review, verification and acceptance PENDING; G0-06 not signed off |
+| M0-T12 | Create ADR index and decision log with owner/date fields | P1 | S | — | DONE | Index/log reviewed and accepted by Project Owner 2026-10-19; IMPLEMENTED → VERIFIED → DONE; missing ADR-001/002/004 correctly remain pending; G0-06 satisfied; evidence [[06-Implementation/PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]] |
 
 **M0 exit:** all P0 tasks `DONE`; no `BLOCKED` task remains in M1.
 
@@ -69,7 +69,7 @@ For the audit history and previous `TODO` / `REVIEW` values see [[09-Implementat
 
 | ID | Task | Pri | Size | Depends on | Status | Blocker / note |
 |---|---|---|---|---|---|---|
-| M1-T01 | Initialize pnpm workspace with `apps/*` and `packages/*` per ADR-003 | P0 | M | M0-T03 | BLOCKED | Unmet dependency / approval |
+| M1-T01 | Initialize pnpm workspace with `apps/*` and `packages/*` per ADR-003 | P0 | M | M0-T03 | IN_PROGRESS | M0-T03 DONE; Foundation Development Gate ACTIVATED 2026-10-19 and OpenCode execution authorized (M1-T01 only). Toolchain verified (Node 24.22.0 / pnpm 12.14.0); Gitleaks v8.30.0 scan clean; docs-only baseline committed. Workspace files under implementation. |
 | M1-T02 | Add TypeScript strict config, project references, path aliases | P0 | S | M1-T01 | BLOCKED | Unmet dependency / approval |
 | M1-T03 | Add shared ESLint + Prettier + import-boundary rules per ADR-005 | P0 | M | M1-T01, M0-T05 | BLOCKED | Unmet dependency / approval |
 | M1-T04 | Add Docker Compose: PostgreSQL, Redis, Meilisearch, MinIO | P0 | M | M1-T01 | BLOCKED | Unmet dependency / approval |
@@ -459,7 +459,7 @@ For each task:
 
 ## 2. Ready-to-start tasks (current)
 
-Only unfinished, unblocked M0 planning tasks are eligible for recommendation; authorization is still required. M0-T05 is DONE. The next small candidate is M0-T12 (ADR index, no dependencies); it has not been started or authorized. The earlier planning order is retained below as historical guidance:
+Only unfinished, unblocked M0 planning tasks are eligible for recommendation; authorization is still required. M0-T05 and M0-T12 are DONE. ADR-003/M0-T03 is also DONE. The earlier planning order is retained below as historical guidance; M0-T12 has been completed since that ordering was written:
 
 1. **M0-T05** module boundaries — DONE, 2026-10-19; excluded from new work.
 2. **M0-T07** canonical route map (no external dependency).
@@ -470,12 +470,12 @@ Only unfinished, unblocked M0 planning tasks are eligible for recommendation; au
 
 Then the decision-blocked ADRs (M0-T01 to M0-T04, T06, T09) once stakeholders respond.
 
-**Do not start M1 until M0-T02 and M0-T03 are `DONE`.**
+**Do not start M1 until M0-T02 and M0-T03 are `DONE`, except M1-T01 may proceed only after all activation conditions in [[09-Implementation/Foundation-Development-Gate]] are met.**
 
 ## Reconciliation notes (documentation-only)
 
 - Existing task IDs preserved. Original statuses `TODO` were normalized to `NOT_STARTED`, **not** `READY`. Blocker details were moved into the `Blocker / note` column.
-- All M1+ tasks also require **Gate 0 approval**, regardless of local dependency lists.
+- All M1+ tasks require **Gate 0 approval**, regardless of local dependency lists, except the specifically approved M1-T01-only exception after activation. Full Gate 0 remains NOT READY.
 - `M12-T02 → M11` is milestone-level; `M12-T11 → All` needs an explicit, non-self-referential release prerequisite list before approval.
 - `M5` payment/COD E2E acceptance occurs only when the relevant M6/M8 capabilities are present; core checkout testing remains in M5. See [[09-Implementation/Milestone-Reconciliation]].
 - Review the disputed dependencies in the reconciliation document; they have **not** been declared resolved by this status normalization.

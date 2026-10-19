@@ -314,3 +314,44 @@ PowerShell initially read the actual instructions/progress/specifications and ca
 Request architecture/security review of ADR-003 and the foundation/scope/Git proposals, plus M0-T12 index/log verification. After a satisfactory review, Project Owner must explicitly accept the relevant documents/tasks and separately approve the exact gate scope and tooling. Git baseline adoption/scanner/provisioning, final handoff preparation/acceptance and eventual OpenCode execution each need their recorded authority. ADR-001/002/004 and all unapproved policies remain pending; no current prerequisite was silently removed. Stop after this documentation package.
 
 ---
+
+## ADR-003 and M0-T12 approval evidence
+
+Record date: 2026-10-19. This entry records ADR-003/M0-T12 acceptance and M1-T01 handoff preparation.
+
+### Approval and status evidence
+
+The Final Foundation Readiness Review returned ACCEPT for ADR-003 Revision 1, M0-T12, Foundation Development Gate Revision 1 and M1-T01 Scope Proposal. Git Baseline returned REVISE pending `.gitignore`/scanner validation. The Project Owner explicitly approved ADR-003 Revision 1, accepted M0-T12, approved the M1-T01-only Foundation Development Gate and approved Node.js 24.22.0 / pnpm 12.14.0 pins. No approval was inferred for ADR-001, ADR-002 or ADR-004; the existing ADR-005 approval is unchanged.
+
+M0-T03 and M0-T12 were each recorded IMPLEMENTED → VERIFIED → DONE on 2026-10-19. M0-T03 verification evidence is the accepted final architecture review and comparison against ADR-005, the structural sketch, existing application/finance topology documents and API ingress/security constraints. M0-T12 verification evidence is the accepted index/log review: all five ADR records accurately identify ADR-001/002/004 as pending and ADR-005 as approved, with owners, review state, task IDs, Gate 0 links, dependencies, supersession and source approval evidence. Explicit Project Owner approval supplies acceptance for both task closures. This verifies documentation deliverables only, not runtime behavior.
+
+The approved gate remains `active: false` and the M1-T01 backlog row remains BLOCKED. Its exact whitelist is M1-T01 only. Full Gate 0 remains NOT READY: G0-03, G0-05, G0-06 and G0-24 are satisfied (4/35); 31 remain outstanding. All 100 application feature rows remain NOT_STARTED, canonical task IDs and M0–M12 remain unchanged.
+
+### Files changed or created
+
+- Approved ADR-003 Revision 1 and recorded its review/owner approval.
+- Accepted ADR Index and Decision Log; appended this approval record.
+- Approved Foundation Development Gate Revision 1 and M1-T01 Scope Proposal; the gate is inactive and scope approval grants no execution authority.
+- Created `.gitignore` under explicit owner authorization. It excludes environment/credential/private-key files, dependencies, build/cache/test output, logs, local data/database/dumps and OS artifacts; sanitized examples and normal source/docs/tests/lockfiles remain trackable. `git check-ignore` positive/negative tests were not run.
+- Created [[09-Implementation/Task-Handoffs/M1-T01]] with status PREPARED and `execution_authorized: false`.
+- Synchronized root/docs agent guidance, Start Here, backlog, task backlog, dependency graph, architecture audit, milestones, readiness checklist and implementation tracking so they reflect the approved but inactive exception.
+
+### Git and secret-scanner evidence
+
+Read-only object/index inspection observed branch `main`, HEAD and `origin/main` at `ddd8d1a0e46f2e0badaaa0253425bd5f789a6f91`, 60 tracked/index entries, no staged entries and no untracked paths at the inspection snapshot. The worktree now has authorized documentation and `.gitignore` edits; native `git status` could not be executed because the host shell was denied. Existing remote was inspected without exposing credentials; no Git metadata was changed. No commit, push, initialization, reset, clean or history rewrite occurred.
+
+Selected Gitleaks v8.30.0 Windows x64 as the pinned scanner. It was not found in the conventional executable locations checked. Native version queries and the Gitleaks scan could not run because command execution was unavailable; scanner installation was not authorized. Earlier repository heuristics found no high-confidence secret candidates, but the baseline is NOT security-verified. The updated Git Setup Plan documents the exact pinned release, checksum gate, installation location, redacted history/worktree scan commands and reporting rules. Current accepted pre-code baseline remains PENDING.
+
+Official release information confirms Node.js 24.22.0 is an LTS release and pnpm 12 supports Node.js 24. The host binaries were not verified as available or exact-version because native commands could not run. No tool was installed or upgraded.
+
+### Verification and remaining blockers
+
+- Re-read approved architecture/tracking evidence. Confirmed 277 unique task IDs against the earliest tracked backlog, 100 application feature rows still NOT_STARTED, and M0–M12 milestone IDs retained.
+- Readiness Checklist now records four satisfied Gate 0 requirements; remaining 31 are unchecked and full Gate 0 remains NOT READY.
+- Operative governance references now describe the approved M1-T01-only exception while retaining the full Gate 0 rule for all other implementation. Link integrity and task-status cross-checks passed; this synchronization prerequisite is satisfied.
+- Gitleaks scan, native Git status, `git check-ignore`, local Node/pnpm version checks, pnpm workspace tests and all application tests were not run. No application files/manifests, dependency installation, migration or deployment was created/performed.
+- Gate activation still requires local toolchain verification, approved scanner provisioning and a clean full-history/worktree scan, native Git/ignore checks, an owner-authorized documentation commit establishing the final baseline SHA, handoff review and explicit OpenCode execution permission. The user prohibited tool installation, Git commit/push and coding in this task; these limits are respected.
+
+Next action: Project Owner review of this recorded synchronization; then separately authorize any needed scanner/tool provisioning and baseline commit/status validation. Do not begin M1-T01 until the gate activation and execution approvals are documented.
+
+---

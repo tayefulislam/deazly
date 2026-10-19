@@ -11,7 +11,7 @@ created: 2026-10-19
 # Git Setup and Architecture Baseline Plan
 
 > [!danger] PLAN ONLY — DO NOT INITIALIZE OR COMMIT
-> Git setup requires separate Project Owner authorization. Preparing this document does not run git init, create .gitignore or grant commit/push authority. It does not activate [[09-Implementation/Foundation-Development-Gate]].
+> Project Owner approved preservation of the existing repository and creation of the root `.gitignore`. This does not authorize `git init`, commit, push, history rewrite, scanner installation or Foundation Gate activation.
 
 ## 1. Inspected repository and sensitive-file evidence
 
@@ -21,13 +21,31 @@ During preparation, an external actor created .git, a root README containing onl
 
 Scan the current complete file set again before Git execution, not just the earlier baseline. Check hidden files, .env variants, private-key/key-store/credential files, registry auth, database/provider connection strings, tokens and high-confidence credential patterns. Report paths/classifications, never secret values. Inspect Markdown and archived/update notes as well as code. A heuristic scan with no candidates is not a guarantee of no secrets or a substitute for an approved scanner and manual staged review. Runtime logs, uploads, private evidence, database dumps and generated outputs must not enter the baseline.
 
-An approved secret scanner must be selected, version-pinned and provisioned under separate authority before commit; scanner identity/version and invocation remain PENDING, not a fabricated completed check. Do not install it during documentation preparation. If a credential is found, stop staging, restrict evidence, notify the owner for rotation/redaction and rescan; do not commit then delete it in a later commit. Do not rewrite existing history to conceal failures.
+Selected scanner: Gitleaks v8.30.0, pinned to the official Windows x64 release. The Project Owner authorized selection and documented preparation, not installation. The executable was not found in the conventional locations checked; the restricted host could not run `where.exe` or scanner commands. No Gitleaks scan was executed. Installation and scan requirements are recorded in section 2.1. Before commit, provision this exact version under separate authority; verify the official release archive against its accompanying SHA-256 checksum, record `gitleaks version`, and scan all reachable Git history plus the complete working tree with fully redacted output. If checksum verification fails or a credential is found, stop, restrict evidence, arrange credential rotation/redaction and rescan. Never rewrite history to conceal a finding.
 
-## 2. Ignore requirements (future file, not created now)
+No scanner result is claimed. Earlier heuristic checks found no high-confidence candidates, but cannot replace the pinned scanner or manual staged review.
 
-Create/review a root .gitignore only after explicit authorization. Cover nested node_modules, local pnpm caches, .next/out/dist/build outputs, coverage and Playwright/test reports, logs, local service data/uploads/dumps and OS temporary files. Ignore .env and .env.*; permit only sanitized .env.example equivalents after review. Exclude private keys/key stores and local credential files. Preserve any deliberately public certificate fixture only through explicit review, never a blanket secret exception.
+## 2. Ignore requirements
+
+The root `.gitignore` has now been created under explicit Project Owner authorization. Its rules cover environment secrets, credentials/private keys, dependencies, generated outputs, local databases/data, logs, temporary files and OS artifacts. Sanitized `.env.example` and `.env.*.example` files remain trackable. Positive/negative `git check-ignore` tests remain pending because Git command execution is unavailable. The rules do not ignore source, documentation, manifests, lockfiles or sanitized examples.
+
+The authorized root `.gitignore` has been created. It covers nested node_modules, local pnpm caches, .next/out/dist/build outputs, coverage and Playwright/test reports, logs, local service data/uploads/dumps and OS temporary files. It ignores .env and .env.* while permitting sanitized examples; excludes private keys/key stores and local credential files; and does not use blanket source/documentation exceptions. Positive/negative ignore verification remains pending.
 
 Keep pnpm-lock.yaml, package manifests, source, required tests, approved docs, migrations and sanitized examples trackable. Do not hide source directories, all JSON/YAML or the entire Obsidian vault. If Obsidian machine-specific workspace state appears, review targeted ignores rather than deleting vault configuration. A future .npmrc must be credential-free if committed; tokens belong in authorized environment/secret storage. No .npmrc is required by M1-T01.
+
+### 2.1 Pinned secret-scanner installation and execution
+
+Scanner: [Gitleaks v8.30.0 official release](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.0), Windows x64 asset `gitleaks_8.30.0_windows_x64.zip`. Download only the archive and matching checksum manifest from that exact official release page. Compare the archive SHA-256 with its manifest before extraction; stop on missing/mismatched checksum. Extract `gitleaks.exe` to a user-managed tools directory outside this repository, do not add it to Git, then verify `gitleaks version` reports v8.30.0. No installer script, Docker image, third-party package manager, repository hook or network service is required. Installation needs separate authorization and has not been performed.
+
+After provisioning, run from the repository root with full redaction and no report file in the repository:
+
+```powershell
+gitleaks version
+gitleaks git --redact=100 --no-color --log-opts="--all" .
+gitleaks dir --redact=100 --no-color .
+```
+
+The Git mode scans commit patches reachable through local refs (including `main` and `origin/main`); the directory mode scans the complete working tree, including untracked files. Record scanner version, SHA-256, commit SHA, command exit codes and redacted finding counts/paths only. Never paste finding values into logs. Inspect each candidate locally and determine credential rotation needs; do not add broad allowlists or create a baseline that suppresses findings without owner review. [Gitleaks documents the `git` and `dir` scan modes](https://github.com/gitleaks/gitleaks#usage). The v8.30.1 Windows x64 release has a reported checksum mismatch, so v8.30.0 is selected as the reproducible pin pending normal security advisory review. [Reported release checksum issue](https://github.com/gitleaks/gitleaks/issues/2164).
 
 Verify both positive and negative ignore examples with git check-ignore after initialization: .env.local/node_modules/build output ignored; .env.example, lockfile, docs and required tests not ignored. Inspect exclusion rules before trusting a clean status.
 
@@ -38,7 +56,7 @@ Verify both positive and negative ignore examples with git check-ignore after in
 3. Inspect the existing main repository and remote without exposing credentials. Do not run git init again. If this plan is reused where no repository exists, initialization requires a fresh explicit git init -b main authorization in this root only. Do not initialize inside docs or create a nested marketplace repository. Inspect status; no application permission follows.
 4. Stage an explicit reviewed allowlist: .gitignore, AGENTS.md, productStucture.md, UPDATE-NOTES.md and docs/. These include historical proposals as history, not as newly approved decisions. Inspect all candidates first; do not blindly git add . or silently rename the structural sketch.
 5. Review git diff --cached --name-status, --stat and --check and inspect the full staged patch locally without exposing credentials in shared logs. Run the approved scanner against the staged snapshot, not merely the working tree; record tool version, scope, exit result and redacted finding handling.
-6. Recheck task IDs, milestone structure, approval metadata, feature rows and historical progress. Obtain explicit authority for the initial commit and the intended author identity; do not guess or change global Git identity.
+6. Recheck task IDs, milestone structure, approval metadata, feature rows and historical progress. Obtain explicit authority for any commit and the intended author identity; do not guess or change global Git identity.
 7. Review the existing candidate commit and, under explicit owner authority, adopt it or add a follow-up sanitized architecture/planning commit, proposed message docs(architecture): record planning baseline. Never amend/reset the external commit by inference. Record the accepted SHA/date and which documents remain PROPOSED. A commit may precede later approvals; it must not claim all decisions are approved.
 8. Before M1-T01 execution, separately commit authorized approval/governance/final-handoff updates if needed. Record the resulting final pre-code baseline SHA on a clean planned task branch; ensure it includes operative foundation approval. An unapproved draft-only commit is not sufficient activation evidence.
 
@@ -56,8 +74,8 @@ Record exact root, scanner/version/results, reviewed allowlist, ignore checks, a
 
 For later workspace recovery use an approved revert of the exact task commit, preserving the docs baseline. If task changes are uncommitted, inspect their per-file manifest and recover only those authorized paths; stop if mixed with user changes. Do not delete .git, recursively clean the repository, reset --hard, rewrite history or purge shared dependency caches. A finding after a commit requires an incident/credential response and explicit history-remediation authority, not a silent rewrite.
 
-- Project Owner approval for ignore creation/initialization: PENDING.
-- Scanner selection/provisioning and staged-review evidence: PENDING.
-- Initial commit author identity and commit authorization: PENDING.
-- Observed external main commit: e5bd5da26def292260292c026abd25ff4985ae54 (observed 2026-10-19); accepted pre-code baseline: PENDING review, ignore/scanner checks and applicable approvals.
-- Any remote/push/deployment permission: NOT GRANTED.
+- Project Owner approval for root ignore rules: APPROVED; `.gitignore` created; `git check-ignore` positive and negative checks pass. Git initialization was not needed.
+- Scanner selection: Gitleaks v8.30.0. Provisioned 2026-10-19 from the official Windows x64 release; archive SHA-256 verified (`54fe94f644b832dd08e8c3a5915efb3bfa862386d59fb27ca0792cb687a83573`); `gitleaks version` reports 8.30.0. Full-history (3 commits) and working-tree scans ran with `--redact=100` and found no leaks.
+- Initial commit author identity and commit authorization: docs-only baseline commit AUTHORIZED by Project Owner 2026-10-19; resulting pre-code baseline SHA and task branch recorded in [[06-Implementation/PROGRESS-LOG]].
+- Earlier observed commits: `e5bd5da26def292260292c026abd25ff4985ae54` then `ddd8d1a0e46f2e0badaaa0253425bd5f789a6f91` (pre-baseline). No history rewrite occurred.
+- Any remote/push/deployment permission: NOT GRANTED; no push was performed.

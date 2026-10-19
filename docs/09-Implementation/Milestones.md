@@ -71,7 +71,7 @@ flowchart LR
 ### Deliverables
 - [ ] ADR-001 Authentication architecture (session vs OIDC, MFA, guest access).
 - [ ] ADR-002 ORM selection (Prisma vs Drizzle) with decision matrix.
-- [ ] ADR-003 Deployment topology and app count (finance app vs admin route).
+- [x] ADR-003 Deployment topology and app count (finance app vs admin route) — Revision 1 APPROVED by Project Owner, 2026-10-19; M0-T03 DONE; G0-03/G0-24 satisfied; [[06-Implementation/PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]].
 - [ ] ADR-004 Money representation and rounding policy.
 - [x] ADR-005 Module boundaries and dependency rules — Revision 3 APPROVED by Project Owner, 2026-10-19; M0-T05 DONE; [[06-Implementation/PROGRESS-LOG#M0-T05 approval evidence]]. All other M0 deliverables remain outstanding; Gate 0 remains NOT READY.
 - [ ] RBAC permission matrix (role × permission × scope).
@@ -526,11 +526,11 @@ A milestone is complete only when:
 
 ## 4. Suggested first milestone
 
-**Start with M0, then M1.** Do not start M2 before ADR-001 and the RBAC matrix exist, and do not start M1 before ADR-002 selects the ORM. See [[09-Implementation/Task-Backlog]] for the executable task list and [[09-Implementation/Readiness-Checklist]] for the exact unblock sequence.
+**Start with M0, then M1.** Do not start general M1 implementation before ADR-002 selects the ORM; the approved Foundation Development Gate is a narrow exception for M1-T01 only, after activation. Do not start M2 before ADR-001 and the RBAC matrix exist. See [[09-Implementation/Task-Backlog]] for the executable task list and [[09-Implementation/Readiness-Checklist]] for the exact unblock sequence.
 
 ## Gate 0 and dependency reconciliation notes
 
-- M1 implementation is blocked until all required Gate 0 approvals have evidence; see [[09-Implementation/Readiness-Checklist]].
+- M1 implementation is blocked until required Gate 0 approvals have evidence, except the approved M1-T01-only Foundation Development Gate may be activated after its prerequisites pass. Full Gate 0 remains NOT READY; no other task is exempt. See [[09-Implementation/Readiness-Checklist]] and [[09-Implementation/Foundation-Development-Gate]].
 - M5 checkout tests must separate core checkout verification from end-to-end payment/COD coverage after M6/M8.
 - M11 ads/recommendations release criticality remains a decision; do not silently remove these requirements.
 - The original milestone goals remain planning targets, not completed code.

@@ -1,18 +1,19 @@
 ---
 tags: [implementation, scope, foundation, planning]
 task: M1-T01
-status: PROPOSED
-approval: PENDING
-execution_authorized: false
+status: APPROVED
+approval: APPROVED
+execution_authorized: true
 decision_owner: Project Owner
-review_status: PENDING
+review_status: ACCEPTED
 revision: 1
 created: 2026-10-19
+approval_date: 2026-10-19
 ---
 # M1-T01 — Workspace Scope Proposal (Not Final Handoff)
 
-> [!danger] NOT APPROVED / DO NOT EXECUTE
-> Original task remains BLOCKED. This is a review specification only; it is deliberately not docs/09-Implementation/Task-Handoffs/M1-T01.md. No application source, manifest, lockfile, test, README or ignore file is created by preparing this document.
+> [!note] SCOPE APPROVED / EXECUTION AUTHORIZED (M1-T01 only)
+> The Project Owner approved this scope and the Node/pnpm pins on 2026-10-19 and, on the same date, activated the M1-T01-only Foundation Development Gate and explicitly authorized OpenCode execution. This document is the scope proposal; the executable handoff is [[09-Implementation/Task-Handoffs/M1-T01]]. Full Gate 0 remains NOT READY.
 
 ## 1. Original definition and objective
 
@@ -22,7 +23,7 @@ Proposed objective after approval: initialize only a private, reproducible works
 
 ## 2. Preconditions and authorization
 
-Require accepted ADR-003/M0-T03 DONE, accepted ADR index/log M0-T12, explicit approved foundation exception and scope/pins, separately authorized/provisioned tools, sanitized Git baseline and final reviewed handoff/execution permission. See the gate activation table for evidence. Do not silently satisfy M0-T02, remove blanket prerequisites or unblock another task. Scope approval permits subsequent final-handoff preparation only after its prerequisites; it is not coding permission.
+Require approved ADR-003/M0-T03 DONE, accepted ADR index/log M0-T12, approved M1-T01-only exception and scope/pins, separately provisioned and locally verified tools, sanitized/accepted Git baseline and final reviewed handoff plus explicit execution permission. The gate is approved but inactive until all its prerequisites pass. Do not silently satisfy M0-T02 or unblock another task. Scope and handoff preparation are not coding permission.
 
 ## 3. Exact proposed implementation file allowlist
 
@@ -57,8 +58,8 @@ The explicit frozen-install check may create ignored local pnpm/node_modules met
 
 | Tool | Proposed exact version | Current evidence / policy |
 |---|---|---|
-| Node.js | 24.22.0 | Official release page identifies this LTS release; local read-only check returned 22.22.2, so the execution environment is not prepared for this pin |
-| pnpm | 12.14.0 | Official release exists; local pnpm launcher found but not executed or provisioned. Pin packageManager to pnpm@12.14.0; verify exact executable version before work |
+| Node.js | 24.22.0 | Project Owner approved; official release page identifies this LTS release. Local host version remains UNVERIFIED because command execution was unavailable |
+| pnpm | 12.14.0 | Project Owner approved; official release exists and pnpm documents Node 24 compatibility. Local executable/version remains UNVERIFIED |
 
 Version sources checked 2026-10-19: [Node releases](https://nodejs.org/en/about/previous-releases), [pnpm 12.14.0](https://github.com/pnpm/pnpm/releases/tag/v12.14.0). Proposed versions are not automatically approved or installed. Recheck official security/release information before freezing the final handoff; any replacement pin requires an approved scope revision. Root engines and workspace tests must enforce approved pins, not latest tags or silent runtime downloads. Use official verified distributions under separate provisioning authority; do not disable TLS, antivirus or integrity checks.
 
@@ -108,4 +109,4 @@ DoD for the eventual task: approved scope/preconditions, passing meaningful work
 
 ## 8. Review record
 
-Architecture/security scope review and Project Owner scope/tooling approval: PENDING. Final handoff creation/acceptance and OpenCode execution permission: PENDING. Git/tool provisioning/commit authority: PENDING. Foundation gate: PROPOSED/inactive. Full Gate 0: NOT READY (1/35).
+Architecture review: ACCEPT; Project Owner approved scope and pins 2026-10-19. Final handoff review: ACCEPTED; OpenCode execution permission GRANTED 2026-10-19 (M1-T01 only). Local toolchain verification: SATISFIED (Node 24.22.0 / pnpm 12.14.0). Git baseline security acceptance: SATISFIED (Gitleaks v8.30.0 clean; `git check-ignore` pass; docs-only baseline committed). Foundation gate: APPROVED and ACTIVE (M1-T01 only). Full Gate 0: NOT READY (4/35).

@@ -1,9 +1,9 @@
 ---
 type: project-status
 project: multi-vendor-marketplace
-phase: PLANNING
-current_milestone: M0
-overall_status: NOT_STARTED
+phase: FOUNDATION
+current_milestone: M1
+overall_status: IN_PROGRESS
 last_updated: 2026-10-19
 ---
 
@@ -41,22 +41,22 @@ Technology:
 
 Phase: PLANNING
 
-Active Planning Milestone: M0 — Decisions and architecture records
+Active Implementation Milestone: M1 — Platform foundation (only M1-T01 authorized)
 
-Active Implementation Task: None
+Active Implementation Task: M1-T01 — Initialize pnpm workspace (IN_PROGRESS)
 
-Next Planning Action: review M0-T03 and M0-T12 drafts and the proposed Foundation Development Approval Package; no new coding task is authorized.
+Next Implementation Action: finish the M1-T01 workspace manifests, workspace test and dependency-free lockfile; run the approved verification commands; submit evidence for review. Do not start M1-T02 or any later task.
 
 M0-T05 planning deliverable: DONE — transitioned IMPLEMENTED → VERIFIED → DONE on 2026-10-19. Project Owner accepted the final Revision 3 ACCEPT review, approved ADR-005 and explicitly authorized task closure. Verification and acceptance evidence: [[PROGRESS-LOG#M0-T05 approval evidence]]. This completes a planning document only, not application implementation.
 
-M0-T03 and M0-T12 planning deliverables: IMPLEMENTED as documentation drafts under the user's Foundation Development Approval Package authorization. [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]], [[05-Architecture/ADRs/ADR-Index]] and [[05-Architecture/ADRs/Decision-Log]] are PROPOSED, pending required review, verification and acceptance; neither task is VERIFIED or DONE.
+M0-T03: DONE — ADR-003 Revision 1 APPROVED by Project Owner after final readiness review ACCEPT. M0-T12: DONE — ADR Index and Decision Log accepted and verified. Evidence: [[PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]]. G0-03, G0-06 and G0-24 are satisfied; ADR-005/G0-05 remains satisfied.
 
-Option B was selected for proposal preparation, not activation. [[09-Implementation/Foundation-Development-Gate]], [[09-Implementation/M1-T01-Scope-Proposal]] and [[09-Implementation/Git-Setup-Plan]] are PROPOSED only. The foundation gate is inactive, M1-T01 remains BLOCKED, final handoff is absent and Git/tool provisioning/coding permission is not granted.
+Foundation Development Gate Revision 1 is APPROVED and **ACTIVE (M1-T01 only)**. M1-T01 is IN_PROGRESS. [[09-Implementation/Task-Handoffs/M1-T01]] is AUTHORIZED. Node v24.22.0 / pnpm 12.14.0 verified, `git check-ignore` positive/negative checks pass, Gitleaks v8.30.0 full-history and working-tree scans are clean (redacted), and a docs-only baseline commit established the pre-code baseline. Evidence: [[PROGRESS-LOG]].
 
-Next implementation foundation task after Gate 0: M1-T01 — Initialize pnpm workspace (currently BLOCKED).
+Current implementation task: M1-T01 — Initialize pnpm workspace (IN_PROGRESS, authorized 2026-10-19).
 
 Implementation permission:
-NOT APPROVED
+APPROVED — M1-T01 only. No other task is authorized.
 
 ## Milestone Overview
 
@@ -65,7 +65,7 @@ Canonical detailed milestones: [[09-Implementation/Milestones|M0–M12]]. Legacy
 | ID | Scope | Application implementation |
 |---|---|---|
 | M0 | Decisions and architecture records | NOT_STARTED for application implementation; M0-T05 planning task DONE and ADR-005 approved; milestone remains incomplete |
-| M1 | Platform foundation | NOT_STARTED |
+| M1 | Platform foundation | IN_PROGRESS (M1-T01 private pnpm workspace only; no app/runtime code) |
 | M2 | Identity and tenancy | NOT_STARTED |
 | M3 | Catalog, offers and media | NOT_STARTED |
 | M4 | Inventory and warehouses | NOT_STARTED |
@@ -95,11 +95,11 @@ counts alone. Use verified task and feature evidence.
 
 ## Current Blockers
 
-- Remaining architecture decisions and Gate 0 approval pending; ADR-005 alone is approved
+- Full Gate 0 remains NOT READY (4/35). ADR-001, ADR-002, ADR-004 and downstream business policies remain pending; the M1-T01-only gate is now ACTIVE.
 - Database design review pending
 - API contract review pending
 - UI/UX specification review pending
-- Development environment not initialized
+- Development environment initialized for M1-T01 only (private pnpm workspace); no application runtime, ORM or service is initialized
 
 ## Important Business Rules
 
@@ -135,9 +135,9 @@ its acceptance criteria and verification evidence.
 
 ## Planning evidence and open decisions
 
-- Gate 0: **NOT READY**; **1 of 35 requirements satisfied** (G0-05 only), 34 outstanding. The historical supplied audit reported 0/35.
+- Gate 0: **NOT READY**; **4 of 35 requirements satisfied** (G0-03, G0-05, G0-06, G0-24), 31 outstanding. The historical supplied audit reported 0/35.
 - [[05-Architecture/ADRs/ADR-005-Module-Boundaries]] Revision 3 is **APPROVED** by Project Owner on 2026-10-19; M0-T05 is **DONE**.
-- ADR-003 now exists as a PROPOSED draft; ADR-001/002/004 files remain missing and unapproved. Business-policy approvals remain pending. See [[05-Architecture/ADRs/ADR-Index]].
-- Git was uninitialized at this session's initial check but appeared externally during preparation. Observed main commit: e5bd5da26def292260292c026abd25ff4985ae54; remote configuration exists. No Git initialization/commit/push was performed by this agent. Baseline acceptance, ignore/secret checks and full status/index verification remain pending; see [[09-Implementation/Git-Setup-Plan]].
+- ADR-003 Revision 1 is APPROVED; ADR-001/002/004 files remain missing and unapproved. Business-policy approvals remain pending. See [[05-Architecture/ADRs/ADR-Index]].
+- Existing Git repository is preserved. On 2026-10-19 the Project Owner authorized a docs-only baseline commit; the resulting pre-code baseline SHA and branch `chore/m1-t01-workspace` are recorded in [[PROGRESS-LOG]]. `git check-ignore` positive/negative checks pass and Gitleaks v8.30.0 scanned all reachable history and the working tree with no findings. No history rewrite, reset, clean or force push occurred. See [[09-Implementation/Git-Setup-Plan]].
 - Detailed task status source: [[09-Implementation/Task-Backlog]].
 - Uncovered requirements: [[09-Implementation/Feature-Coverage-Gaps]].

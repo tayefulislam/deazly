@@ -2,29 +2,30 @@
 tags: [architecture, adr, topology, planning]
 adr: ADR-003
 task: M0-T03
-status: PROPOSED
-approval: PENDING
+status: APPROVED
+approval: APPROVED
 decision_owner: Project Owner
-review_status: PENDING
+review_status: ACCEPTED
 revision: 1
 created: 2026-10-19
+approval_date: 2026-10-19
 ---
 # ADR-003 — Application and Deployment Topology
 
-> [!warning] PROPOSED — NOT APPROVED
-> Authorized work is documentation only. This proposal neither activates the Foundation Development Gate nor authorizes scaffolding, installation, Git initialization or deployment. M0-T03 is IMPLEMENTED as a draft, not VERIFIED or DONE.
+> [!important] APPROVED — Revision 1, Project Owner, 2026-10-19
+> M0-T03 is DONE as a verified and accepted architecture decision. This approval does not activate the Foundation Development Gate or authorize implementation. Only the separately approved M1-T01 exception may be activated after every documented prerequisite is verified. Full Gate 0 remains NOT READY.
 
 ## 1. Decision record
 
 | Field | Record |
 |---|---|
-| Decision owner / approver | Project Owner; approval/date PENDING |
+| Decision owner / approver | Project Owner; approved 2026-10-19 |
 | Author | Codex, Lead Architect, under the Foundation Development Approval Package request |
-| Architecture/security reviewers | PENDING; author checks are not independent acceptance |
+| Architecture/security reviewers | Codex final readiness review: ACCEPT; explicit Project Owner approval recorded 2026-10-19; no separately named specialist audit claimed |
 | Related requirements | G0-03 deployment topology; G0-24 finance application placement |
 | Prerequisites / interfaces | Approved ADR-005 controls module ownership. ADR-001 must finalize authentication before identity implementation; this ADR proposes hosting/cookie constraints, not a session/OIDC selection |
 | Supersedes | Nothing while PROPOSED; proposed reconciliation targets are listed in section 8 |
-| Approval evidence | PENDING; [[05-Architecture/ADRs/Decision-Log]] records draft provenance |
+| Approval evidence | Final readiness review ACCEPT and explicit Project Owner approval, recorded in [[05-Architecture/ADRs/Decision-Log]] and [[06-Implementation/PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]] |
 
 ## 2. Context and alternatives
 
@@ -127,7 +128,7 @@ Required review: six-app/five-package consistency; finance placement; cookie hos
 
 Open decisions: ADR-001 auth mechanism and cookie details; M0-T06 role vocabulary; M0-T07 exact finance/locale routes; server export map; local TLS/host/port setup; production DNS/provider/residency; remaining ADR-002/004 and business policies. None prevents reviewing this logical layout; none is silently approved by it.
 
-- Architecture/security review verdict and evidence: PENDING.
-- Project Owner approval/date: PENDING.
-- G0-03 / G0-24: remain unchecked pending verified acceptance.
-- Foundation gate approval, Git/tool provisioning and implementation permission: separate, PENDING.
+- Architecture/security review verdict and evidence: Final Foundation Readiness Review ACCEPT; decision recorded by Project Owner on 2026-10-19.
+- Project Owner approval/date: APPROVED, 2026-10-19.
+- G0-03 / G0-24: SATISFIED; checklist evidence recorded.
+- Foundation gate approval is separate; the gate is approved but inactive. Git/toolchain verification and M1-T01 execution permission remain pending.

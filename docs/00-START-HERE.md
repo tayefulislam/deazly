@@ -64,9 +64,10 @@ No live payments until vendor isolation, oversell prevention, idempotent webhook
 - [[09-Implementation/Readiness-Checklist]] — 131 verifiable gate items
 
 > [!important] Start with the audit
-> The planning set concludes the vault is **not implementation-ready** until Gate 0 in
-> [[09-Implementation/Readiness-Checklist]] is signed off. Begin with the ADRs and the
-> unresolved policies in [[01-Product/Decision-Register]].
+> The planning set concludes that full implementation is **not ready** until Gate 0 in
+> [[09-Implementation/Readiness-Checklist]] is signed off. Gate 0 remains NOT READY;
+> only M1-T01 may be considered under the separately approved, currently inactive
+> [[09-Implementation/Foundation-Development-Gate]].
 
 ## 2026-10-19 — Planning reconciliation
 
@@ -74,16 +75,17 @@ No live payments until vendor isolation, oversell prevention, idempotent webhook
 - Canonical roadmap: [[09-Implementation/Milestones]] (M0–M12).
 - Legacy aliases: [[09-Implementation/Milestone-Reconciliation]].
 - Task lifecycle policy: [[09-Implementation/Task-Status-Policy]].
-- Approved ADR-005: [[05-Architecture/ADRs/ADR-005-Module-Boundaries]] (**Revision 3, APPROVED by Project Owner, 2026-10-19; M0-T05 DONE**). Only G0-05 is satisfied; Gate 0 remains NOT READY. Other ADRs and application implementation remain unapproved.
+- Approved ADR-005: [[05-Architecture/ADRs/ADR-005-Module-Boundaries]] (**Revision 3, APPROVED by Project Owner, 2026-10-19; M0-T05 DONE**). ADR-003 Revision 1 is APPROVED and M0-T03/M0-T12 are DONE. G0-03, G0-05, G0-06 and G0-24 are satisfied; Gate 0 remains NOT READY (4/35). ADR-001, ADR-002 and ADR-004 remain pending.
 - Feature coverage gaps: [[09-Implementation/Feature-Coverage-Gaps]].
 - Operational progress: [[06-Implementation/PROJECT-STATUS]] and [[06-Implementation/CURRENT-SPRINT]].
 
-## Foundation Development Approval Package — proposed, not active
+## Foundation Development Approval Package — approved, gate inactive
 
-- [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]] — six-app/finance-in-Admin proposal; not approved.
-- [[05-Architecture/ADRs/ADR-Index]] and [[05-Architecture/ADRs/Decision-Log]] — M0-T12 draft deliverables; review/acceptance pending.
-- [[09-Implementation/Foundation-Development-Gate]] — proposed M1-T01-only exception; no existing prerequisite is waived today.
-- [[09-Implementation/M1-T01-Scope-Proposal]] — scope proposal, not final coding handoff.
-- [[09-Implementation/Git-Setup-Plan]] — Git/ignore/secret/baseline proposal; unexecuted.
+- [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]] — six-app/finance-in-Admin topology, APPROVED Revision 1.
+- [[05-Architecture/ADRs/ADR-Index]] and [[05-Architecture/ADRs/Decision-Log]] — accepted M0-T12 deliverables, DONE.
+- [[09-Implementation/Foundation-Development-Gate]] — APPROVED M1-T01-only exception; inactive until all activation conditions pass.
+- [[09-Implementation/M1-T01-Scope-Proposal]] — approved scope and toolchain pins; not execution permission.
+- [[09-Implementation/Git-Setup-Plan]] — existing Git repository preserved; baseline scan/status acceptance pending.
+- [[09-Implementation/Task-Handoffs/M1-T01]] — prepared, NOT AUTHORIZED FOR EXECUTION.
 
-M0-T03 and M0-T12 are IMPLEMENTED as documents only. Gate 0 remains NOT READY, with G0-05 alone satisfied; M1-T01 remains BLOCKED. Option B selection authorized preparation, not gate activation, Git initialization, installation or application coding.
+M0-T03 and M0-T12 are DONE as accepted documentation. Gate 0 remains NOT READY (4/35); M1-T01 remains BLOCKED. The approved foundation gate has not been activated. No tools were installed and no application coding was authorized.

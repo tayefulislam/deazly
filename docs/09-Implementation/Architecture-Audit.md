@@ -481,7 +481,9 @@ Additionally, none of the 22 existing screens has a complete field-level specifi
 
 ## 12. Recommended improvements
 
-### 12.1 Immediate (before scaffolding)
+### 12.1 Immediate (before general application scaffolding)
+
+These prerequisites remain the default for all implementation other than M1-T01. The approved [[09-Implementation/Foundation-Development-Gate]] permits only that dependency-free workspace initialization after its activation checks; it does not unblock the dependent M1 tasks or business modules.
 1. Write **ADR-001 Authentication architecture** (session vs OIDC, MFA, guest access).
 2. Write **ADR-002 ORM selection** with a decision matrix (Prisma vs Drizzle) covering: migrations, raw SQL for ledger/locking, type safety, partial indexes, transactions, JSONB, tooling.
 3. Write **ADR-003 Deployment topology** (number of frontends, finance app vs admin route).

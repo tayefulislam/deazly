@@ -187,6 +187,8 @@ flowchart TD
   AUTHZ --> I18N
 ```
 
+The broad `ADR2 --> MONO` edge remains applicable to general foundation work. The Project Owner-approved [[09-Implementation/Foundation-Development-Gate]] narrowly overrides that edge for M1-T01 only, after activation prerequisites pass. It does not unblock TypeScript, lint, containers, ORM, migrations, CI or any business task.
+
 ---
 
 ## 2. Critical path
@@ -398,6 +400,6 @@ flowchart TD
 
 A dependency graph must distinguish **build prerequisites**, **runtime public interface calls**, **event subscriptions**, and **foreign keys**. These are not interchangeable nor permission to import a module’s private repositories. See [[05-Architecture/ADRs/ADR-005-Module-Boundaries]].
 
-Gate 0 explicitly blocks M1 and later implementation until approval. The Codex audit flagged additional sequencing for quote revalidation, COD approval, common offer eligibility, settlements and M12 release sign-off; see [[09-Implementation/Milestone-Reconciliation]]. This appendix documents issues without falsely marking them resolved.
+Gate 0 blocks M1 and later implementation except M1-T01 under the Project Owner-approved [[09-Implementation/Foundation-Development-Gate]] after its activation prerequisites pass. Full Gate 0 remains NOT READY and no other task is excepted. The Codex audit flagged additional sequencing for quote revalidation, COD approval, common offer eligibility, settlements and M12 release sign-off; see [[09-Implementation/Milestone-Reconciliation]]. This appendix documents issues without falsely marking them resolved.
 
 Migration sequence IDs `M001`–`M012` in diagrams are **not** milestone IDs; their conflicting uses in Data-Model and this graph require separate reconciliation before migrations.

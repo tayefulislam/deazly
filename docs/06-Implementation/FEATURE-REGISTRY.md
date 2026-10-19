@@ -196,4 +196,4 @@ The 100 feature IDs above are retained. No feature has been implemented or verif
 
 M0-T05 is DONE as a documentation-only deliverable: IMPLEMENTED → VERIFIED → DONE on 2026-10-19, following the final ACCEPT review and explicit Project Owner approval of ADR-005 Revision 3 and task closure. Evidence: [[PROGRESS-LOG#M0-T05 approval evidence]]. All 100 application feature rows remain unchanged at NOT_STARTED. ADR-005 is APPROVED; Gate 0 remains NOT READY.
 
-M0-T03 (ADR-003) and M0-T12 (ADR index/decision log) are IMPLEMENTED as PROPOSED documentation drafts, pending required review, verification and acceptance. This changes no application feature row. The [[09-Implementation/Foundation-Development-Gate]] is PROPOSED/inactive; M1-T01 remains BLOCKED and no final coding handoff exists.
+M0-T03 (ADR-003) and M0-T12 (ADR index/decision log) are DONE as accepted planning documents. The Foundation Development Gate is APPROVED but inactive; the M1-T01 handoff is PREPARED and NOT AUTHORIZED FOR EXECUTION. No application feature row changes: all 100 application features remain NOT_STARTED.

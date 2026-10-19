@@ -30,7 +30,7 @@ created: 2026-10-19
 
 ## 0. How to use this checklist
 
-- **Gate 0** must be fully green before scaffolding begins.
+- **Gate 0** must be fully green before implementation, except that approved Foundation Development Gate Revision 1 may authorize M1-T01 alone after all of its activation prerequisites are verified. This exception does not change Gate 0 status or authorize any other task.
 - Each later gate maps to a milestone in [[09-Implementation/Milestones]].
 - A box may only be checked when the evidence column has a link to a test run, document, or PR.
 - Partial completion is recorded as partial, never as complete.
@@ -45,10 +45,10 @@ created: 2026-10-19
 |---|---|---|---|
 | G0-01 | ADR-001 authentication architecture approved | — | ☐ |
 | G0-02 | ADR-002 ORM selected with decision matrix | — | ☐ |
-| G0-03 | ADR-003 deployment topology approved | — | ☐ |
+| G0-03 | ADR-003 deployment topology approved | [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]] Revision 1; Project Owner approval 2026-10-19; [[05-Architecture/ADRs/Decision-Log]] | ☑ |
 | G0-04 | ADR-004 money and rounding policy approved | — | ☐ |
 | G0-05 | ADR-005 module boundaries approved | [[05-Architecture/ADRs/ADR-005-Module-Boundaries]] Revision 3; Project Owner approval 2026-10-19; [[06-Implementation/PROGRESS-LOG#M0-T05 approval evidence]] | ☑ |
-| G0-06 | ADR index and decision log created | — | ☐ |
+| G0-06 | ADR index and decision log created | [[05-Architecture/ADRs/ADR-Index]] and [[05-Architecture/ADRs/Decision-Log]]; M0-T12 VERIFIED and accepted/DONE 2026-10-19; [[06-Implementation/PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]] | ☑ |
 
 ### 1.2 Business decisions
 
@@ -76,7 +76,7 @@ created: 2026-10-19
 | G0-21 | Role vocabulary conflicts resolved (C-08) | — | ☐ |
 | G0-22 | Canonical route map published (C-11) | — | ☐ |
 | G0-23 | Single design token set published (C-10) | — | ☐ |
-| G0-24 | App topology decided: finance app vs admin route (C-09) | — | ☐ |
+| G0-24 | App topology decided: finance app vs admin route (C-09) | [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]] Revision 1 places protected Finance inside Admin; Project Owner approved 2026-10-19 | ☑ |
 | G0-25 | Missing data objects designed (24 items, audit §3.1) | — | ☐ |
 | G0-26 | Missing API areas specified (18 items, audit §6.1) | — | ☐ |
 | G0-27 | Missing screens specified (22 items, audit §7) | — | ☐ |
@@ -89,7 +89,7 @@ created: 2026-10-19
 | G0-34 | Webhook contract per provider published | — | ☐ |
 | G0-35 | Idempotency semantics published (scope, TTL, replay) | — | ☐ |
 
-**Gate 0 exit:** all items checked with evidence. **Currently 1/35 (G0-05 only); 34 outstanding. Gate 0 remains NOT READY.**
+**Gate 0 exit:** all items checked with evidence. **Currently 4/35 (G0-03, G0-05, G0-06 and G0-24); 31 outstanding. Gate 0 remains NOT READY.**
 
 ---
 
@@ -262,13 +262,13 @@ created: 2026-10-19
 
 | Area | Items | Checked | Status |
 |---|---|---|---|
-| Gate 0 — Decisions and specs | 35 | 0 | ❌ |
+| Gate 0 — Decisions and specs | 35 | 4 | ❌ |
 | Gate 1 — Foundation, identity, orders, ledger | 26 | 0 | ❌ |
 | Gate 2 — Inventory, fulfillment, shipping | 13 | 0 | ❌ |
 | Gate 3 — Tax, COD, settlement, payout | 17 | 0 | ❌ |
 | Gate 4 — Returns, i18n, search, growth | 17 | 0 | ❌ |
 | Launch readiness | 23 | 0 | ❌ |
-| **Total** | **131** | **0** | **0%** |
+| **Total** | **131** | **4** | **3.1%** |
 
 ---
 
@@ -295,10 +295,10 @@ flowchart TD
 3. Publish the RBAC matrix and reconcile role names.
 4. Reconcile design tokens and the canonical route map.
 5. Complete the missing data objects, prioritizing identity, cart, discounts, translations, media, and COD approval.
-6. Sign off Gate 0, then start M1.
+6. Sign off Gate 0 before general M1 work. M1-T01 alone may proceed only after the approved Foundation Development Gate is activated and its handoff/execution approval is recorded.
 
-**Do not start implementation before Gate 0 sign-off.** Doing so would require guessing business rules, which `AGENTS.md` §4 forbids.
+**Do not start implementation before Gate 0 sign-off, except M1-T01 under the narrowly approved and activated Foundation Development Gate.** Doing other work would require guessing unresolved rules, which `AGENTS.md` §4 forbids.
 
 ## Gate 0 status after documentation reconciliation
 
-**NOT READY:** The historical supplied Codex assessment reported 0/35 sign-offs. Project Owner approval of ADR-005 Revision 3 on 2026-10-19 now satisfies G0-05 only (1/35). The remaining 34 requirements are outstanding; no other ADR, policy or Gate 0 approval is inferred. Review [[09-Implementation/Milestone-Reconciliation]], [[09-Implementation/Task-Status-Policy]], [[05-Architecture/ADRs/ADR-005-Module-Boundaries]], and [[09-Implementation/Feature-Coverage-Gaps]].
+**NOT READY:** G0-03 (approved ADR-003 topology), G0-05 (approved ADR-005 boundaries), G0-06 (accepted ADR index/log) and G0-24 (finance placement) are satisfied (4/35); 31 requirements remain outstanding. The approved Foundation Development Gate is INACTIVE and does not complete Gate 0. It can authorize only M1-T01 after all activation checks pass. Review [[09-Implementation/Milestone-Reconciliation]], [[09-Implementation/Task-Status-Policy]], [[05-Architecture/ADRs/ADR-005-Module-Boundaries]], and [[09-Implementation/Feature-Coverage-Gaps]].

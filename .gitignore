@@ -1,0 +1,66 @@
+# Environment and credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+.npmrc
+**/.npmrc
+!.npmrc.example
+.netrc
+.pypirc
+**/credentials.json
+**/*credentials*.local.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Dependencies and package-manager caches
+node_modules/
+.pnpm-store/
+.pnp.*
+
+# Build output and generated caches
+.next/
+out/
+dist/
+build/
+.turbo/
+.cache/
+.eslintcache
+
+# Test and coverage artifacts
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+blob-report/
+
+# Logs and temporary files
+*.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+*.tmp
+*.temp
+*.swp
+*.bak
+*.old
+
+# Local data, databases, uploads and dumps
+/data/local/
+/infrastructure/local-data/
+local-uploads/
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
