@@ -1,0 +1,6 @@
+{
+  "name": "@deazly/api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "NestJS API application placeholder (no server bootstrap)"
+}

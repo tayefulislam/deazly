@@ -1,0 +1,20 @@
+{
+  "name": "deazly",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Deazly multi-vendor marketplace monorepo (workspace foundation)",
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": "24.22.0",
+    "pnpm": "12.14.0"
+  },
+  "scripts": {
+    "test": "node --test tests/workspace/workspace.test.mjs tests/typescript/typescript.test.mjs",
+    "test:workspace": "node --test tests/workspace/workspace.test.mjs",
+    "test:typescript": "node --test tests/typescript/typescript.test.mjs",
+    "typecheck": "tsc --noEmit -p apps/storefront/tsconfig.json && tsc --noEmit -p apps/vendor/tsconfig.json && tsc --noEmit -p apps/admin/tsconfig.json && tsc --noEmit -p apps/warehouse/tsconfig.json && tsc --noEmit -p apps/api/tsconfig.json && tsc --noEmit -p apps/worker/tsconfig.json && tsc --noEmit -p packages/database/tsconfig.json && tsc --noEmit -p packages/ui/tsconfig.json && tsc --noEmit -p packages/contracts/tsconfig.json && tsc --noEmit -p packages/validation/tsconfig.json && tsc --noEmit -p packages/config/tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
+}

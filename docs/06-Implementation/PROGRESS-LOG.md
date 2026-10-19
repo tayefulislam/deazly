@@ -355,3 +355,250 @@ Official release information confirms Node.js 24.22.0 is an LTS release and pnpm
 Next action: Project Owner review of this recorded synchronization; then separately authorize any needed scanner/tool provisioning and baseline commit/status validation. Do not begin M1-T01 until the gate activation and execution approvals are documented.
 
 ---
+
+## 2026-10-19 — M1-T01 pnpm workspace initialization (IMPLEMENTED — review pending)
+
+### Authorization
+
+Project Owner explicitly authorized OpenCode execution of **M1-T01 only** ("DEAZLY — START CODING NOW"), activated the M1-T01-only Foundation Development Gate, and separately authorized (a) installation of the approved toolchain, (b) a docs-only baseline commit, and (c) provisioning of Gitleaks v8.30.0. Full Gate 0 remains NOT READY (4/35). No other M1+ task is authorized.
+
+### Summary
+
+The private, dependency-free pnpm workspace was initialized at the repository root with six application placeholders, five shared package placeholders, a Node built-in workspace metadata test and a generated lockfile. No application framework, TypeScript, ORM, API, worker, UI, database, migration or infrastructure code was created.
+
+### Status transition
+
+Previous status: BLOCKED → new status: IMPLEMENTED. Independent review and explicit Project Owner acceptance remain outstanding, so the task is **not** VERIFIED or DONE. All 100 application feature rows remain NOT_STARTED; 277 task IDs and M0–M12 are unchanged.
+
+### Approved toolchain (verified)
+
+- Node.js **v24.22.0** — `C:\nvm4w\nodejs\node.exe` (installed via nvm-windows 1.2.2).
+- pnpm **12.14.0** — `C:\nvm4w\nodejs\pnpm.cmd` (installed globally under Node 24.22.0).
+- Gitleaks **v8.30.0** — official Windows x64 release; archive SHA-256 `54fe94f644b832dd08e8c3a5915efb3bfa862386d59fb27ca0792cb687a83573` (manifest match verified).
+
+### Git baseline and secret scanning
+
+- Pre-code baseline commit: `b1d26ab2a4326aec109fdbbceb9a44d2add738cc` on `main` ("docs(architecture): record planning baseline and activate M1-T01 gate"), 21 files (documentation + `.gitignore`); worktree clean afterwards.
+- Task branch `chore/m1-t01-workspace` created from that baseline SHA.
+- `git check-ignore` positive/negative checks pass: secrets, `node_modules`, build outputs, logs and local data/dumps are ignored; sanitized `.env.example`, source, docs, tests, manifests and lockfiles remain trackable.
+- Gitleaks v8.30.0, `--redact=100`: `gitleaks git --log-opts="--all"` scanned 3 commits with no leaks; `gitleaks dir` scanned the working tree (including the new workspace files) with no leaks.
+
+### Files created/changed (M1-T01 allowlist)
+
+- `package.json` — private root, `packageManager` `pnpm@12.14.0`, `engines` node `24.22.0` / pnpm `12.14.0`, scripts `test` and `test:workspace`.
+- `pnpm-workspace.yaml` — `apps/*`, `packages/*`, plus the deviation below.
+- `pnpm-lock.yaml` — `lockfileVersion: '9.0'`; root plus eleven workspace importers; no external dependencies.
+- `.node-version` — `24.22.0`.
+- `apps/{storefront,vendor,admin,warehouse,api,worker}/package.json` — private `@deazly/*` `0.0.0` placeholders.
+- `packages/{database,ui,contracts,validation,config}/package.json` — private `@deazly/*` `0.0.0` placeholders.
+- `tests/workspace/workspace.test.mjs` — Node built-ins only; 13 tests including negative fixtures (duplicate names, public package, dependency present, install hook, missing/extra workspaces, mismatched pins).
+- `README.md` — existing heading preserved; workspace setup, toolchain provisioning, verification and out-of-scope sections added.
+
+### Verification evidence
+
+| Command | Result |
+|---|---|
+| `node --test tests/workspace/workspace.test.mjs` | 13 pass / 0 fail, exit 0 |
+| `pnpm install --lockfile-only --offline --ignore-scripts --no-runtime` | exit 0 ("all 12 workspace projects") |
+| `pnpm install --frozen-lockfile --offline --ignore-scripts --no-runtime` (×2) | exit 0; lockfile SHA-256 unchanged between runs |
+| `pnpm --recursive list --depth -1 --json` | 12 entries (root + 11), all private, version 0.0.0 |
+| `pnpm run test:workspace` | 13 pass, exit 0 |
+| `pnpm test` | 13 pass, exit 0 |
+| `git diff --check` | exit 0 (no whitespace errors) |
+| `git status --short` | only the intended workspace files; `node_modules` ignored |
+| `gitleaks dir --redact=100` | no leaks, exit 0 |
+
+### Scope deviation — requires review
+
+pnpm 12.14.0 resolves the legacy `packageManager` field as a **config dependency**. Under `--offline` this failed with `ERR_PNPM_BAD_CONFIG_DEP`, and `--frozen-lockfile` then failed with `ERR_PNPM_FROZEN_LOCKFILE_WITH_OUTDATED_LOCKFILE`. The documented pnpm-12 replacement for the removed `managePackageManagerVersions: false` is **`pmOnFail: ignore`**. That one setting was added to `pnpm-workspace.yaml` so the approved offline commands pass reproducibly. It is a one-line addition beyond the scope's "discovery-only" description of that file and is **flagged for reviewer approval**. No dependency, runtime, provider call, lifecycle hook or third-party artifact was introduced. An alternative (passing `--pm-on-fail=ignore` per command) was rejected because it would not make the committed `--frozen-lockfile` reproducible.
+
+### Definition of Done status
+
+Requirements implemented; exact pins enforced; dependency-free lockfile reproducible; workspace tests, ignore checks and secret scans pass. Independent review and explicit Project Owner acceptance have **not** yet occurred: M1-T01 is IMPLEMENTED, not VERIFIED/DONE. The workspace test is not an application build and not the M1 exit gate.
+
+Next: Project Owner/Codex review of the M1-T01 diff, evidence and the `pmOnFail` deviation; if accepted, a separately authorized task commit. Do not start M1-T02.
+
+---
+
+## 2026-10-19 — M1-T01 review-findings corrections (documentation only)
+
+### Authorization
+
+Project Owner instruction "DEAZLY — Fix M1-T01 Review Findings" (2026-10-19): documentation-only corrections to resolve the Codex REVISE verdict, plus formal approval of the `pmOnFail: ignore` deviation for M1-T01 only. No application code, no `pnpm-workspace.yaml` change, no new dependency, no M1-T02, no commit.
+
+### Review input
+
+Codex returned REVISE with four findings: (1) stale "inactive" statements inside `Foundation-Development-Gate.md`; (2) `Readiness-Checklist.md` still claimed only G0-05 was checked and the gate was INACTIVE; (3) `FEATURE-REGISTRY.md` still described the gate as inactive and the handoff as not authorized; (4) the `pmOnFail: ignore` deviation was technically sound but not yet authorized in the scope/handoff.
+
+### Corrections applied (docs only)
+
+- `docs/09-Implementation/Foundation-Development-Gate.md` — replaced stale current-state claims (`active=false`, "proposed and not effective", "versions not approved", "Git baseline unauthorized", "verification pending") with dated activation updates; historical preparation wording retained.
+- `docs/09-Implementation/Readiness-Checklist.md` — G0 count corrected to 4/35 (G0-03, G0-05, G0-06, G0-24) and gate status corrected to ACTIVE for M1-T01 only; Gate 0 remains NOT READY.
+- `docs/06-Implementation/FEATURE-REGISTRY.md` — gate now ACTIVE for M1-T01 only; handoff authorized and task IMPLEMENTED pending review; all 100 application features remain NOT_STARTED.
+- `docs/09-Implementation/M1-T01-Scope-Proposal.md` — added an activation-update note and a new § 9 recording the approved `pmOnFail: ignore` deviation (root cause, justification, version-enforcement tradeoff, required external checks, independent verification, Owner approval evidence).
+- `docs/09-Implementation/Task-Handoffs/M1-T01.md` — backlog state corrected to IMPLEMENTED; gate reference corrected to ACTIVE; added the approved-deviation section; approval record extended.
+- `docs/AGENTS.md` — corrected the same stale "gate INACTIVE" statement in the canonical tracking section.
+
+### Re-verification evidence
+
+| Command | Result |
+|---|---|
+| `node --version` | `v24.22.0` |
+| `pnpm --version` | `12.14.0` |
+| `node --test tests/workspace/workspace.test.mjs` | 13 pass / 0 fail, exit 0 |
+| `pnpm run test:workspace` | 13 pass / 0 fail, exit 0 |
+| `pnpm install --frozen-lockfile --offline --ignore-scripts --no-runtime` | exit 0; lockfile SHA-256 unchanged |
+| `git diff --check` | exit 0 (only benign LF→CRLF warnings) |
+
+### Status
+
+M1-T01 remains **IMPLEMENTED** (not VERIFIED/DONE); VERIFIED/DONE require passing evidence plus explicit Project Owner acceptance. Gate is ACTIVE for M1-T01 only; full Gate 0 remains NOT READY (4/35); M1-T02 remains BLOCKED. No commit made. Lockfile SHA-256 `C798D205C612EBD70059EBB7ED27AF884C7D92E545AC8007B2D8C69E320B952E` unchanged.
+
+Next: Project Owner/Codex acceptance of the documentation corrections and the recorded deviation; if accepted, separately authorize the M1-T01 task commit. Do not start M1-T02.
+
+---
+
+## 2026-10-19 — M1-T01 pre-activation status-language correction (documentation only)
+
+### Authorization
+
+Project Owner instruction "DEAZLY — Final M1-T01 Corrections" (2026-10-19): correct the single remaining Codex finding — outdated pre-activation status language. Documentation only; no source, manifest, pnpm-configuration or test change.
+
+### Corrections applied (docs only)
+
+- `docs/09-Implementation/Task-Handoffs/M1-T01.md` — added a clearly identified **CURRENT VERIFIED STATUS** section (Node 24.22.0, pnpm 12.14.0, accepted baseline `b1d26ab`, completed Gitleaks v8.30.0 scans, gate ACTIVE for M1-T01 only, `pmOnFail: ignore` approved). Labeled the old unverified/unavailable/pending statements as historical pre-activation observations with supersession notes; original history preserved.
+- `docs/09-Implementation/M1-T01-Scope-Proposal.md` — retitled §4 and marked the pin table rows as *(Historical, pre-activation)* vs *(Current, verified)*; marked the §5 command block as the executed historical plan. Now consistent with the handoff and gate activation records; approval chronology preserved.
+
+### Re-verification evidence (Task 3)
+
+| Command | Result |
+|---|---|
+| `git status` | branch `chore/m1-t01-workspace`; only intended docs + workspace files; `node_modules` ignored |
+| `git diff --check` | exit 0 (only benign LF→CRLF warnings) |
+| `node --version` | `v24.22.0` |
+| `pnpm --version` | `12.14.0` |
+| `pnpm test` | 13 pass / 0 fail, exit 0 |
+
+### Status
+
+M1-T01 remains **IMPLEMENTED** (not VERIFIED/DONE); VERIFIED/DONE require explicit Project Owner acceptance. Gate ACTIVE for M1-T01 only; full Gate 0 remains NOT READY (4/35); M1-T02 remains BLOCKED. No source/manifest/pnpm-config/test change, and no commit. 277 task IDs and all 100 feature rows unchanged.
+
+Next: Project Owner/Codex acceptance of the corrected documentation; if accepted, separately authorize the M1-T01 task commit. Do not start M1-T02.
+
+---
+
+## 2026-10-19 — M1-T01 independent host re-verification and M1-T02 handoff preparation (no implementation)
+
+### Authorization
+
+Project Owner instruction "DEAZLY — CONTINUE DEVELOPMENT" (2026-10-19): independently verify M1-T01, do not repeat completed implementation work, prepare a narrow M1-T02 handoff, and implement M1-T02 only if its required authorization is recorded. No code change was authorized for M1-T02 because its authorization is not yet recorded.
+
+### M1-T01 status (unchanged)
+
+M1-T01 remains **IMPLEMENTED** (not VERIFIED/DONE). Exact remaining acceptance requirement: **independent review of the M1-T01 diff/evidence and acceptance of the `pmOnFail: ignore` deviation, followed by explicit Project Owner acceptance.**
+
+### M1-T01 independent re-verification (this session)
+
+| Command | Result |
+|---|---|
+| `node --version` | `v24.22.0` |
+| `pnpm --version` | `12.14.0` |
+| `node --test tests/workspace/workspace.test.mjs` | 13 pass / 0 fail, exit 0 |
+| `pnpm install --frozen-lockfile --offline --ignore-scripts --no-runtime` | exit 0; lockfile SHA-256 unchanged at `C798D205C612EBD70059EBB7ED27AF884C7D92E545AC8007B2D8C69E320B952E` |
+| `git log`/`git status` | branch `chore/m1-t01-workspace` at `b1d26ab`; workspace files present; only intended tracked/untracked changes; `node_modules` ignored |
+
+No source, manifest, pnpm-configuration, lockfile or test file was modified. Because acceptance evidence is still outstanding, M1-T01 was **not** marked VERIFIED or DONE.
+
+### M1-T02 authorization status
+
+**BLOCKED.** [[09-Implementation/Task-Backlog]] lists M1-T02 ("Add TypeScript strict config, project references, path aliases", depends on M1-T01) as BLOCKED. The Foundation Development Gate is **M1-T01 only** and explicitly never rolls forward; full Gate 0 remains NOT READY (4/35). The single missing authorization is **explicit Project Owner authorization to start M1-T02** (a gate extension to include M1-T02, or a new M1-T02-specific exception).
+
+### Preparation produced (documentation only)
+
+- Created [[09-Implementation/Task-Handoffs/M1-T02]] as a **PREPARED — NOT AUTHORIZED** draft covering the shared strict base config, per-app and per-package configs, path aliases, the exact TypeScript version pin (candidate `7.0.2`, to be Owner-approved), `typecheck` scripts, Node built-in configuration tests and monorepo compatibility — plus eight open decisions requiring Owner approval before execution.
+
+No application code, TypeScript configuration, dependency or script was added.
+
+### Status
+
+M1-T01 **IMPLEMENTED**; M1-T02 **BLOCKED / NOT AUTHORIZED**; Gate ACTIVE for M1-T01 only; full Gate 0 NOT READY (4/35). No commit. 277 task IDs and all 100 feature rows unchanged.
+
+Next: Project Owner must (1) provide the M1-T01 acceptance decision, and (2) grant the single missing M1-T02 authorization and resolve the handoff's section 10 decisions. Do not start M1-T02 until then.
+
+---
+
+## 2026-10-19 — M1-T01 deviation acceptance; M1-T02 exception approved (CONDITIONAL); no code written
+
+### Authorization
+
+Project Owner instruction "DEAZLY — AUTHORIZE AND IMPLEMENT M1-T02" (2026-10-19): explicitly accept the `pmOnFail: ignore` deviation, approve a narrow M1-T02-only Foundation Development Gate exception, resolve the M1-T02 technical decisions, and implement once the authorization conditions and prerequisites are satisfied.
+
+### M1-T01 status (unchanged)
+
+**IMPLEMENTED — not VERIFIED/DONE.** The Project Owner explicitly accepted the `pmOnFail: ignore` deviation; they explicitly kept the task at IMPLEMENTED pending independent review + final task acceptance. No independent Codex review is claimed as passed. Recorded in [[09-Implementation/M1-T01-Scope-Proposal]] §9 and [[09-Implementation/Task-Handoffs/M1-T01]].
+
+### M1-T02 authorization (recorded)
+
+The Project Owner approved a narrow **M1-T02-only** exception, recorded in [[09-Implementation/Foundation-Development-Gate]] §11, [[09-Implementation/Task-Handoffs/M1-T02]], [[09-Implementation/Task-Backlog]] and this log. It excludes M1-T03 and every other task and does **not** change Gate 0 (still NOT READY, 4/35). It is **APPROVED but NOT YET EFFECTIVE**: per the Owner's instruction it becomes effective only after **M1-T01 is accepted** and the M1-T02 prerequisites are verified. M1-T02 therefore remains **BLOCKED**.
+
+### M1-T02 decisions recorded
+
+- D2: `typescript@6.0.3` selected after confirming npm availability and `engines.node: ">=14.17"` (compatible with Node 24.22.0); exact pin, root devDependency only.
+- D3: minimal `export {};` `src/index.ts` placeholders approved/scope-amended because a meaningful `tsc --noEmit` needs at least one input.
+- D4: project references/composite excluded.
+- D5–D8: proposed defaults (`exactOptionalPropertyTypes` on, `noUncheckedIndexedAccess`/`noUnusedParameters` on, `skipLibCheck: false`, boundary-safe `@deazly/*` aliases). Recorded as proposed, not Owner-approved.
+
+### Implementation status
+
+**No TypeScript code, config, dependency, script or test was written**, because the M1-T02 exception is not yet effective (M1-T01 acceptance is not recorded). The M1-T01 acceptance/review evidence was not fabricated.
+
+### Status
+
+M1-T01 IMPLEMENTED; M1-T02 APPROVED-CONDITIONAL / still BLOCKED; Gate 0 NOT READY (4/35). No commit. 277 task IDs and all 100 feature rows unchanged.
+
+Next: the Project Owner must record the M1-T01 acceptance decision (which also makes the M1-T02 exception effective) or explicitly authorize M1-T02 to proceed while M1-T01 remains IMPLEMENTED. Then implement M1-T02.
+
+---
+
+## 2026-10-19 — M1-T02 implemented (TypeScript strict configuration); M1-T01 kept IMPLEMENTED
+
+### Authorization
+
+Project Owner instruction (2026-10-19) to proceed with M1-T02 under the approved M1-T02-only exception, with the explicit decision: **"Proceed now; M1-T01 stays IMPLEMENTED"** — waiving the M1-T01-acceptance precondition. The waiver is recorded in [[09-Implementation/Foundation-Development-Gate]] §11 and [[09-Implementation/Task-Handoffs/M1-T02]] §3.
+
+### Implementation (M1-T02)
+
+- Added exact root devDependency `typescript@6.0.3` (sole third-party dependency).
+- Added `tsconfig.base.json` with the approved strict set (`strict`, `noUncheckedIndexedAccess`, `noImplicitOverride`, `noFallthroughCasesInSwitch`, `noUnusedLocals`, `noUnusedParameters`, `forceConsistentCasingInFileNames`, `isolatedModules`, `verbatimModuleSyntax`, `exactOptionalPropertyTypes`, `moduleDetection: "force"`, `resolveJsonModule`, `skipLibCheck: false`, `noEmit: true`).
+- Added eleven workspace configs: browser (`storefront`, `vendor`, `admin`, `warehouse`, `ui`), server (`api`, `worker`, `database`, `config`), neutral (`contracts`, `validation`).
+- Added boundary-safe app aliases `@deazly/*` → `packages/*/src/index.ts`; packages declare no cross-package aliases. Project references/`composite` excluded (D4).
+- Added minimal `apps/*/src/index.ts` and `packages/*/src/index.ts` (`export {};` only, D3).
+- Added `tests/typescript/typescript.test.mjs`; updated `tests/workspace/workspace.test.mjs` to permit only the pinned TypeScript devDependency and the new combined `test` script.
+- Added `typecheck`, `test:typescript`; updated `test`; documented the setup in `README.md`; ignored `.pnpm/`.
+
+### Verification evidence
+
+| Command | Result |
+|---|---|
+| `node --test tests/typescript/typescript.test.mjs` | 43 pass / 0 fail, exit 0 |
+| `node --test tests/workspace/workspace.test.mjs` | 13 pass / 0 fail, exit 0 |
+| `pnpm test` | 56 pass / 0 fail, exit 0 |
+| `pnpm run typecheck` | exit 0 (all eleven configs) |
+| `pnpm install --frozen-lockfile --offline --ignore-scripts --no-runtime` | exit 0 |
+| `git diff --check` | exit 0 (benign LF→CRLF warnings only) |
+
+Lockfile SHA-256: `54494067C0034BB796C285D186F1799BCD953A76627933BBEB41D852A52FA4BF`. Branch `chore/m1-t01-workspace`, HEAD `b1d26ab`; changes are uncommitted.
+
+### Deviations recorded
+
+1. `noEmit: true` is centralized in the base rather than repeated per config (all workspaces are typecheck-only).
+2. `target: ES2023` and `lib: ["DOM", "ES2023"]` replace the proposed `ESNext`/`DOM.Iterable`; TS 6 treats `dom.iterable`/`dom.asynciterable` as empty.
+3. D4–D8 remain proposed defaults; only D1–D3 were Owner-directed.
+
+### Status
+
+M1-T01 **IMPLEMENTED** (unchanged; no acceptance fabricated). M1-T02 **IMPLEMENTED — not VERIFIED/DONE**; independent review and acceptance outstanding. Gate 0 remains NOT READY (4/35). No commit, no M1-T03+ work. 277 task IDs and all 100 feature rows unchanged.
+
+Next: independent review of the M1-T02 diff/evidence and Project Owner acceptance; then decide on the M1-T01/M1-T02 commit and only afterward consider authorizing M1-T03.
+
+---

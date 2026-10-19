@@ -69,8 +69,8 @@ For the audit history and previous `TODO` / `REVIEW` values see [[09-Implementat
 
 | ID | Task | Pri | Size | Depends on | Status | Blocker / note |
 |---|---|---|---|---|---|---|
-| M1-T01 | Initialize pnpm workspace with `apps/*` and `packages/*` per ADR-003 | P0 | M | M0-T03 | IN_PROGRESS | M0-T03 DONE; Foundation Development Gate ACTIVATED 2026-10-19 and OpenCode execution authorized (M1-T01 only). Toolchain verified (Node 24.22.0 / pnpm 12.14.0); Gitleaks v8.30.0 scan clean; docs-only baseline committed. Workspace files under implementation. |
-| M1-T02 | Add TypeScript strict config, project references, path aliases | P0 | S | M1-T01 | BLOCKED | Unmet dependency / approval |
+| M1-T01 | Initialize pnpm workspace with `apps/*` and `packages/*` per ADR-003 | P0 | M | M0-T03 | IMPLEMENTED | Workspace created on branch `chore/m1-t01-workspace` from baseline `b1d26ab`; Node 24.22.0 / pnpm 12.14.0 verified; Gitleaks v8.30.0 clean; 13/13 workspace tests pass; dependency-free lockfile reproducible. Awaiting independent review + accepted `pmOnFail` deviation. Not VERIFIED/DONE. |
+| M1-T02 | Add TypeScript strict config, project references, path aliases | P0 | S | M1-T01 | IMPLEMENTED | M1-T02-only gate exception APPROVED and EFFECTIVE 2026-10-19 ([[09-Implementation/Foundation-Development-Gate]] §11); Owner waived the M1-T01-acceptance precondition and kept M1-T01 IMPLEMENTED. `typescript@6.0.3`, `tsconfig.base.json`, 11 workspace configs, `export {};` placeholders, config test and `typecheck` scripts added. 43/43 TypeScript tests, 56/56 combined tests, typecheck exit 0, frozen offline install exit 0. Not VERIFIED/DONE; independent review pending. |
 | M1-T03 | Add shared ESLint + Prettier + import-boundary rules per ADR-005 | P0 | M | M1-T01, M0-T05 | BLOCKED | Unmet dependency / approval |
 | M1-T04 | Add Docker Compose: PostgreSQL, Redis, Meilisearch, MinIO | P0 | M | M1-T01 | BLOCKED | Unmet dependency / approval |
 | M1-T05 | Wire migration tool per ADR-002 and create forward-only policy doc | P0 | M | M1-T01, M0-T02 | BLOCKED | Unmet dependency / approval |
@@ -470,12 +470,12 @@ Only unfinished, unblocked M0 planning tasks are eligible for recommendation; au
 
 Then the decision-blocked ADRs (M0-T01 to M0-T04, T06, T09) once stakeholders respond.
 
-**Do not start M1 until M0-T02 and M0-T03 are `DONE`, except M1-T01 may proceed only after all activation conditions in [[09-Implementation/Foundation-Development-Gate]] are met.**
+**Do not start M1 until M0-T02 and M0-T03 are `DONE`, except M1-T01 (per the activated Foundation Development Gate) and M1-T02 (per the section 11 exception).** Both exceptions are narrow and never roll forward to M1-T03+.
 
 ## Reconciliation notes (documentation-only)
 
 - Existing task IDs preserved. Original statuses `TODO` were normalized to `NOT_STARTED`, **not** `READY`. Blocker details were moved into the `Blocker / note` column.
-- All M1+ tasks require **Gate 0 approval**, regardless of local dependency lists, except the specifically approved M1-T01-only exception after activation. Full Gate 0 remains NOT READY.
+- All M1+ tasks require **Gate 0 approval**, regardless of local dependency lists, except the specifically approved M1-T01 gate and the M1-T02 exception ([[09-Implementation/Foundation-Development-Gate]] §11). Full Gate 0 remains NOT READY.
 - `M12-T02 → M11` is milestone-level; `M12-T11 → All` needs an explicit, non-self-referential release prerequisite list before approval.
 - `M5` payment/COD E2E acceptance occurs only when the relevant M6/M8 capabilities are present; core checkout testing remains in M5. See [[09-Implementation/Milestone-Reconciliation]].
 - Review the disputed dependencies in the reconciliation document; they have **not** been declared resolved by this status normalization.

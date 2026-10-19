@@ -15,15 +15,18 @@ approval_date: 2026-10-19
 > [!note] SCOPE APPROVED / EXECUTION AUTHORIZED (M1-T01 only)
 > The Project Owner approved this scope and the Node/pnpm pins on 2026-10-19 and, on the same date, activated the M1-T01-only Foundation Development Gate and explicitly authorized OpenCode execution. This document is the scope proposal; the executable handoff is [[09-Implementation/Task-Handoffs/M1-T01]]. Full Gate 0 remains NOT READY.
 
+> [!note] Activation update (2026-10-19)
+> The gate is ACTIVE for M1-T01 only and the task is IMPLEMENTED pending review. Statements below that describe the task as BLOCKED, the gate as inactive, the pins as unapproved, the Git baseline as unauthorized or verification as pending reflect the earlier preparation phase and are retained for the historical record only (see also section 9 for the approved pnpm configuration deviation).
+
 ## 1. Original definition and objective
 
-Task-Backlog defines M1-T01 as "Initialize pnpm workspace with apps/* and packages/* per ADR-003", with explicit dependency M0-T03. Preserve this ID, objective, dependency and current BLOCKED state. Root/implementation instructions additionally require full Gate 0 and ORM/topology completion; these restrictions remain operative today.
+Task-Backlog defines M1-T01 as "Initialize pnpm workspace with apps/* and packages/* per ADR-003", with explicit dependency M0-T03. Preserve this ID, objective, dependency and current BLOCKED state. Root/implementation instructions additionally require full Gate 0 and ORM/topology completion; these restrictions remain operative today. (Activation update 2026-10-19: the task is IMPLEMENTED pending review; the earlier BLOCKED state is retained as historical context.)
 
-Proposed objective after approval: initialize only a private, reproducible workspace at E:\Projects\deazly with six app placeholders, five shared package placeholders and meaningful workspace checks. No nested marketplace directory or existing docs reorganization. References: proposed [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]], approved [[05-Architecture/ADRs/ADR-005-Module-Boundaries]], [[09-Implementation/Foundation-Development-Gate]], [[09-Implementation/Git-Setup-Plan]]. Only ADR-005 is approved today.
+Proposed objective after approval: initialize only a private, reproducible workspace at E:\Projects\deazly with six app placeholders, five shared package placeholders and meaningful workspace checks. No nested marketplace directory or existing docs reorganization. References: proposed [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]], approved [[05-Architecture/ADRs/ADR-005-Module-Boundaries]], [[09-Implementation/Foundation-Development-Gate]], [[09-Implementation/Git-Setup-Plan]]. ADR-003 and ADR-005 are both approved; ADR-001, ADR-002 and ADR-004 remain pending.
 
 ## 2. Preconditions and authorization
 
-Require approved ADR-003/M0-T03 DONE, accepted ADR index/log M0-T12, approved M1-T01-only exception and scope/pins, separately provisioned and locally verified tools, sanitized/accepted Git baseline and final reviewed handoff plus explicit execution permission. The gate is approved but inactive until all its prerequisites pass. Do not silently satisfy M0-T02 or unblock another task. Scope and handoff preparation are not coding permission.
+Require approved ADR-003/M0-T03 DONE, accepted ADR index/log M0-T12, approved M1-T01-only exception and scope/pins, separately provisioned and locally verified tools, sanitized/accepted Git baseline and final reviewed handoff plus explicit execution permission. The gate is approved but inactive until all its prerequisites pass. Do not silently satisfy M0-T02 or unblock another task. Scope and handoff preparation are not coding permission. (Activation update 2026-10-19: all prerequisites are satisfied and the gate is ACTIVE for M1-T01 only; the preparation-phase requirements above remain in force for every other task.)
 
 ## 3. Exact proposed implementation file allowlist
 
@@ -54,20 +57,22 @@ No .gitkeep files, additional workspaces, src directories, .npmrc, tsconfig, ESL
 
 The explicit frozen-install check may create ignored local pnpm/node_modules metadata, with no third-party dependencies. Do not commit it, install a runtime/Rust/global toolchain, or touch a shared package store destructively. Unexpected outputs/downloads require stopping and review. Documentation/tracking synchronization is a separate authorized writer action, not an expansion of OpenCode's implementation allowlist.
 
-## 4. Proposed tooling pins — owner approval required
+## 4. Tooling pins — approved and verified (activation update 2026-10-19)
+
+> Historical note: this section was drafted as "proposed tooling pins — owner approval required". The Project Owner has since approved and provisioned these pins, and both were verified locally. The rows below distinguish the historical preparation wording from the current verified state.
 
 | Tool | Proposed exact version | Current evidence / policy |
 |---|---|---|
-| Node.js | 24.22.0 | Project Owner approved; official release page identifies this LTS release. Local host version remains UNVERIFIED because command execution was unavailable |
-| pnpm | 12.14.0 | Project Owner approved; official release exists and pnpm documents Node 24 compatibility. Local executable/version remains UNVERIFIED |
+| Node.js | 24.22.0 | Project Owner approved; official release page identifies this LTS release. *(Historical, pre-activation)* local host version was UNVERIFIED because command execution was unavailable. *(Current, verified)* installed and confirmed: `node --version` → `v24.22.0` |
+| pnpm | 12.14.0 | Project Owner approved; official release exists and pnpm documents Node 24 compatibility. *(Historical, pre-activation)* local executable/version was UNVERIFIED. *(Current, verified)* installed and confirmed: `pnpm --version` → `12.14.0` |
 
-Version sources checked 2026-10-19: [Node releases](https://nodejs.org/en/about/previous-releases), [pnpm 12.14.0](https://github.com/pnpm/pnpm/releases/tag/v12.14.0). Proposed versions are not automatically approved or installed. Recheck official security/release information before freezing the final handoff; any replacement pin requires an approved scope revision. Root engines and workspace tests must enforce approved pins, not latest tags or silent runtime downloads. Use official verified distributions under separate provisioning authority; do not disable TLS, antivirus or integrity checks.
+Version sources checked 2026-10-19: [Node releases](https://nodejs.org/en/about/previous-releases), [pnpm 12.14.0](https://github.com/pnpm/pnpm/releases/tag/v12.14.0). At proposal time the versions were not automatically approved or installed. (Activation update 2026-10-19: the Project Owner approved and provisioned these exact pins and both were locally verified.) Recheck official security/release information before any future pin change; any replacement pin requires an approved scope revision. Root engines and workspace tests must enforce approved pins, not latest tags or silent runtime downloads. Use official verified distributions under separate provisioning authority; do not disable TLS, antivirus or integrity checks.
 
 No Next.js, React, NestJS, TypeScript, Zod, ORM or database version/dependency is introduced. Their version matrices belong to later approved tasks. Platform compatibility and package-manager behavior must be verified on the actual approved environment; reading a release page is not an executed compatibility test.
 
 ## 5. Future execution sequence and commands
 
-These commands are planning text, NOT permission to run installs now.
+These commands were planning text at proposal time, NOT permission to run installs then. (Activation update 2026-10-19: the sequence below has since been executed under explicit Owner authorization; the wording is retained as the historical plan.)
 
 1. Read governing docs and final handoff, confirm all gate evidence, capture baseline SHA/branch/file hashes and stop for any conflicting user changes.
 2. Verify already-approved/provisioned Node/pnpm before writing manifests. Do not let a launcher fetch another version silently.
@@ -105,8 +110,28 @@ No database/API/UI behavior is implemented or changed. Financial, COD, inventory
 
 Use the gate's baseline/change-manifest rollback: reviewed revert of the exact task commit if one was authorized, otherwise restore only task-owned changes under explicit authority. Preserve user work and architecture history; no reset --hard, git clean, .git deletion or shared-store purge. Migrations are prohibited, so no migration rollback is needed.
 
-DoD for the eventual task: approved scope/preconditions, passing meaningful workspace/reproducibility/secret checks with evidence, reviewed diff, actual verification then explicit owner acceptance and authorized progress synchronization. Do not mark any application feature IMPLEMENTED/VERIFIED/DONE from placeholder packages. Today M1-T01 remains BLOCKED; no tests or installs have been executed for this proposed implementation.
+DoD for the eventual task: approved scope/preconditions, passing meaningful workspace/reproducibility/secret checks with evidence, reviewed diff, actual verification then explicit owner acceptance and authorized progress synchronization. Do not mark any application feature IMPLEMENTED/VERIFIED/DONE from placeholder packages. (Activation update 2026-10-19: M1-T01 is IMPLEMENTED pending review; the workspace tests, offline frozen installs and Gitleaks scans were executed with recorded evidence.)
 
 ## 8. Review record
 
 Architecture review: ACCEPT; Project Owner approved scope and pins 2026-10-19. Final handoff review: ACCEPTED; OpenCode execution permission GRANTED 2026-10-19 (M1-T01 only). Local toolchain verification: SATISFIED (Node 24.22.0 / pnpm 12.14.0). Git baseline security acceptance: SATISFIED (Gitleaks v8.30.0 clean; `git check-ignore` pass; docs-only baseline committed). Foundation gate: APPROVED and ACTIVE (M1-T01 only). Full Gate 0: NOT READY (4/35).
+
+## 9. Approved task-specific deviation — `pmOnFail: ignore` in pnpm-workspace.yaml
+
+**Status:** APPROVED by the Project Owner for **M1-T01 only** (approval evidence below). This is the one deviation from the section 3 allowlist.
+
+**Accepted:** the Project Owner explicitly accepted this deviation on 2026-10-19 in the "DEAZLY — AUTHORIZE AND IMPLEMENT M1-T02" instruction. M1-T01 remains at **IMPLEMENTED** — not VERIFIED/DONE — pending independent review and final task acceptance (the Owner explicitly deferred those).
+
+**Deviation:** section 3 describes `pnpm-workspace.yaml` as discovery-only (`apps/*`, `packages/*`). The delivered file additionally contains `pmOnFail: ignore`. No dependency, `packageManager` pin, test or other configuration was changed.
+
+**Root cause:** pnpm 12.14.0 treats the root `packageManager` field (`pnpm@12.14.0`) as a *config dependency* it resolves against the registry. Under the approved `--offline` command this produced `ERR_PNPM_BAD_CONFIG_DEP`; with a generated lockfile, `--frozen-lockfile` then produced `ERR_PNPM_FROZEN_LOCKFILE_WITH_OUTDATED_LOCKFILE` because pnpm wanted to add a `packageManagerDependencies` env lockfile document.
+
+**Technical justification:** `pmOnFail: ignore` is the pnpm 11+ replacement for the removed `managePackageManagerVersions: false`. It is the only documented value that stops pnpm from resolving/downloading its own version and from rewriting the lockfile env document, and it is the intended setting when the toolchain is managed externally. It makes the approved offline command set reproducible and was confirmed recognized (no "unrecognized setting" warning).
+
+**Version-enforcement tradeoff:** pnpm no longer auto-downloads or self-verifies the `packageManager` version at install time. The pin is **not** removed: `packageManager: pnpm@12.14.0`, `engines.node: 24.22.0`, `engines.pnpm: 12.14.0` and `.node-version: 24.22.0` remain declared, and the workspace test asserts all of them.
+
+**Required external version checks:** before running workspace commands, `node --version` must print `v24.22.0` and `pnpm --version` must print `12.14.0` (documented in the README). CI and future automation must assert these pins externally.
+
+**Independent verification:** Codex reproduced the failure and the fix in an isolated scratch workspace, confirmed the setting is supported, and independently re-ran the offline lockfile-only and repeated offline frozen-install workflows (13/13 tests pass; lockfile hash unchanged across frozen runs).
+
+**Approval evidence:** Project Owner instruction "DEAZLY — Fix M1-T01 Review Findings" (2026-10-19) explicitly approves the existing `pmOnFail: ignore` setting for M1-T01, on the ground that pnpm 12.14.0 requires it for the approved reproducible offline workflow while Node/pnpm versions are managed and checked externally, and directs that the `packageManager` pin and workspace tests not be weakened and no further configuration changes be made. Codex review verdict: REVISE (deviation technically sound but needed authorization) — now recorded.

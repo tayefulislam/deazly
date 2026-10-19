@@ -1,0 +1,6 @@
+{
+  "name": "@deazly/database",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Database package placeholder (no ORM or schema)"
+}
