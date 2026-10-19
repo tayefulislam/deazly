@@ -45,4 +45,6 @@ Append future records with decision owner, date, source, review result, status c
 
 ## Next record required — review and explicit acceptance (not yet performed)
 
+Current-session repository observation: Git was absent at the initial check; an external actor subsequently created a main commit e5bd5da26def292260292c026abd25ff4985ae54 including proposal documents and added a small root README. Remote configuration is present. This agent performed no Git writes. Preserve that state; do not infer artifact approval, a clean index or an accepted foundation baseline from the commit. Details and pending validation are recorded in [[09-Implementation/Git-Setup-Plan]].
+
 Record the reviewer identity/date/verdict, findings and exact approved artifact revisions; Project Owner decision/date; allowed exception scope and operative governance cross-references; tooling/Git authority; and any approved M0-T03/M0-T12 task transitions. Keep document approval, task verification/acceptance, gate activation and implementation permission separate. Rejecting or revising a proposal appends a new record; it does not erase this draft history.

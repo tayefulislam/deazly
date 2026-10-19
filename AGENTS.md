@@ -929,7 +929,7 @@ at the same time.
 - `docs/06-Implementation/Backlog.md` is a thematic navigation index; do not treat its stage labels as task IDs.
 - Task lifecycle: `NOT_STARTED`, `READY`, `IN_PROGRESS`, `BLOCKED`, `IMPLEMENTED`, `VERIFIED`, `DONE`. Review verdict `ACCEPT/REVISE/BLOCKED` is separate.
 - ADR-005 Revision 3 is **APPROVED** by Project Owner on 2026-10-19; M0-T05 is **DONE** as a verified and accepted planning deliverable, not application implementation. See `docs/06-Implementation/PROGRESS-LOG.md` for verification and approval evidence.
-- Task M0-T12 ADR index is a subsequent small planning candidate. Monorepo initialization is **M1-T01**, BLOCKED pending Gate 0.
+- M0-T03 ADR-003 and M0-T12 ADR index/log are **IMPLEMENTED documentation drafts**, pending required review and acceptance. The proposed package is indexed in `docs/05-Architecture/ADRs/ADR-Index.md`. Monorepo initialization is **M1-T01**, still BLOCKED; the proposed `docs/09-Implementation/Foundation-Development-Gate.md` is inactive and does not change Gate 0/ORM prerequisites or authorize coding.
 - The approved module-boundary decision is `docs/05-Architecture/ADRs/ADR-005-Module-Boundaries.md`. ADR-001–ADR-004 and downstream policies remain pending; Gate 0 remains NOT READY and application implementation remains unauthorized.
 - Git was reported uninitialized in the provided Codex response; verify the local repository rather than assuming it remains unchanged.
 - Read `docs/09-Implementation/Feature-Coverage-Gaps.md` before declaring any milestone complete.

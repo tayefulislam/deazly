@@ -50,7 +50,7 @@ For the audit history and previous `TODO` / `REVIEW` values see [[09-Implementat
 |---|---|---|---|---|---|---|
 | M0-T01 | Write ADR-001 authentication architecture: session vs OIDC, cookie strategy, CSRF, MFA, guest access tokens, session revocation | P0 | M | — | BLOCKED | decision |
 | M0-T02 | Write ADR-002 ORM selection: Prisma vs Drizzle scored on migrations, raw SQL/locking, partial indexes, JSONB, transactions, type safety, tooling | P0 | M | — | BLOCKED | decision |
-| M0-T03 | Write ADR-003 deployment topology: number of frontends, finance app vs admin route, cookie domains, CI matrix | P0 | S | — | BLOCKED | decision |
+| M0-T03 | Write ADR-003 deployment topology: number of frontends, finance app vs admin route, cookie domains, CI matrix | P0 | S | — | IMPLEMENTED | Documentation-only revision 1 drafted 2026-10-19 under explicit authorization: [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]] PROPOSED; author checks only; required review, verification, acceptance and approval PENDING; not coding permission |
 | M0-T04 | Write ADR-004 money and rounding: minor units, commission rounding, residual allocation, tax base, FX stance | P0 | M | — | BLOCKED | BR-14, BR-13 |
 | M0-T05 | Write ADR-005 module boundaries: allowed imports, shared kernel, read-model rules, lint enforcement plan | P0 | M | — | DONE | IMPLEMENTED → VERIFIED → DONE on 2026-10-19; Revision 3 documentation checks and final ACCEPT review accepted by Project Owner; ADR-005 APPROVED and task closure explicitly authorized; evidence in [[06-Implementation/PROGRESS-LOG#M0-T05 approval evidence]]; no application implementation |
 | M0-T06 | Produce RBAC permission matrix: role × permission × scope predicate, reconciling role vocabulary conflicts | P0 | M | — | BLOCKED | C-08 |
@@ -59,7 +59,7 @@ For the audit history and previous `TODO` / `REVIEW` values see [[09-Implementat
 | M0-T09 | Record Gate 0 policy decisions (country, seller-of-record, tax mode, COD remittance, payout cadence, returns window, negative payable, gateway) | P0 | M | — | BLOCKED | business |
 | M0-T10 | Define performance budgets and capacity targets (SKU count, orders/day, p95 latency, sync throughput) | P1 | S | — | NOT_STARTED | Planning candidate; approval pending |
 | M0-T11 | Define PII classification matrix and log-redaction rules | P0 | M | — | NOT_STARTED | Planning candidate; approval pending |
-| M0-T12 | Create ADR index and decision log with owner/date fields | P1 | S | — | NOT_STARTED | Planning candidate; approval pending |
+| M0-T12 | Create ADR index and decision log with owner/date fields | P1 | S | — | IMPLEMENTED | Documentation-only drafts delivered 2026-10-19: [[05-Architecture/ADRs/ADR-Index]] and [[05-Architecture/ADRs/Decision-Log]]; ADR-005 evidence retained; author checks only; required review, verification and acceptance PENDING; G0-06 not signed off |
 
 **M0 exit:** all P0 tasks `DONE`; no `BLOCKED` task remains in M1.
 

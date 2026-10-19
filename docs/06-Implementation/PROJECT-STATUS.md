@@ -45,9 +45,13 @@ Active Planning Milestone: M0 — Decisions and architecture records
 
 Active Implementation Task: None
 
-Next Planning Task: M0-T12 — ADR index and decision log (NOT_STARTED; authorization pending).
+Next Planning Action: review M0-T03 and M0-T12 drafts and the proposed Foundation Development Approval Package; no new coding task is authorized.
 
 M0-T05 planning deliverable: DONE — transitioned IMPLEMENTED → VERIFIED → DONE on 2026-10-19. Project Owner accepted the final Revision 3 ACCEPT review, approved ADR-005 and explicitly authorized task closure. Verification and acceptance evidence: [[PROGRESS-LOG#M0-T05 approval evidence]]. This completes a planning document only, not application implementation.
+
+M0-T03 and M0-T12 planning deliverables: IMPLEMENTED as documentation drafts under the user's Foundation Development Approval Package authorization. [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]], [[05-Architecture/ADRs/ADR-Index]] and [[05-Architecture/ADRs/Decision-Log]] are PROPOSED, pending required review, verification and acceptance; neither task is VERIFIED or DONE.
+
+Option B was selected for proposal preparation, not activation. [[09-Implementation/Foundation-Development-Gate]], [[09-Implementation/M1-T01-Scope-Proposal]] and [[09-Implementation/Git-Setup-Plan]] are PROPOSED only. The foundation gate is inactive, M1-T01 remains BLOCKED, final handoff is absent and Git/tool provisioning/coding permission is not granted.
 
 Next implementation foundation task after Gate 0: M1-T01 — Initialize pnpm workspace (currently BLOCKED).
 
@@ -133,7 +137,7 @@ its acceptance criteria and verification evidence.
 
 - Gate 0: **NOT READY**; **1 of 35 requirements satisfied** (G0-05 only), 34 outstanding. The historical supplied audit reported 0/35.
 - [[05-Architecture/ADRs/ADR-005-Module-Boundaries]] Revision 3 is **APPROVED** by Project Owner on 2026-10-19; M0-T05 is **DONE**.
-- ADR-001–ADR-004 and business-policy approvals remain pending.
-- Git remains uninitialized (local read-only check at closure); no commit evidence exists.
+- ADR-003 now exists as a PROPOSED draft; ADR-001/002/004 files remain missing and unapproved. Business-policy approvals remain pending. See [[05-Architecture/ADRs/ADR-Index]].
+- Git was uninitialized at this session's initial check but appeared externally during preparation. Observed main commit: e5bd5da26def292260292c026abd25ff4985ae54; remote configuration exists. No Git initialization/commit/push was performed by this agent. Baseline acceptance, ignore/secret checks and full status/index verification remain pending; see [[09-Implementation/Git-Setup-Plan]].
 - Detailed task status source: [[09-Implementation/Task-Backlog]].
 - Uncovered requirements: [[09-Implementation/Feature-Coverage-Gaps]].

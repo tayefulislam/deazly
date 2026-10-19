@@ -257,3 +257,60 @@ No application code, database/API/UI contract implementation, migration or infra
 **M0-T12 — ADR index and decision log**: NOT_STARTED, no listed dependencies, a small planning task to register approved ADR-005 alongside pending decisions and their owners/dates. Recommend it next; explicit authorization is still required. Stop after this documentation closure.
 
 ---
+
+## 2026-10-19 — Foundation Development Approval Package drafts
+
+### Authorization and status transitions
+
+Source: user's "DEAZLY — Prepare Foundation Development Approval Package" request. Project Owner selected Option B as the preferred approach and authorized documentation preparation, author checks and relevant planning tracking only. The request explicitly did not approve the Foundation Development Gate or authorize application coding, installation, migrations, Git initialization or OpenCode execution.
+
+M0-T03: BLOCKED → IN_PROGRESS → IMPLEMENTED, reflecting the authorized drafting phase and delivery of ADR-003 revision 1 as PROPOSED. M0-T12: NOT_STARTED → IN_PROGRESS → IMPLEMENTED, reflecting delivery of the PROPOSED ADR index/log. Neither task is VERIFIED or DONE; required reviewer verification and explicit acceptance remain pending. These task changes do not approve a decision or implement a feature.
+
+M0-T05 remains DONE and approved ADR-005 remains byte-for-byte unchanged. M1-T01 remains BLOCKED; its explicit M0-T03 dependency is unchanged. Full Gate 0 remains NOT READY, with G0-05 alone satisfied (1/35); no other checkbox is changed.
+
+### Documents created (all PROPOSED / approval PENDING)
+
+- docs/05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology.md
+- docs/05-Architecture/ADRs/ADR-Index.md
+- docs/05-Architecture/ADRs/Decision-Log.md
+- docs/09-Implementation/Foundation-Development-Gate.md
+- docs/09-Implementation/M1-T01-Scope-Proposal.md
+- docs/09-Implementation/Git-Setup-Plan.md
+
+### Existing documents modified by this agent
+
+- docs/09-Implementation/Task-Backlog.md — M0-T03/M0-T12 rows only; titles, IDs and dependencies retained.
+- docs/06-Implementation/PROJECT-STATUS.md — draft delivery, pending approvals and observed external Git state.
+- docs/06-Implementation/FEATURE-REGISTRY.md — planning note only; 100 feature rows unchanged.
+- docs/06-Implementation/CURRENT-SPRINT.md — documentation package awaiting review; no coding task active.
+- AGENTS.md — current planning-status/navigation bullet only; no operative prerequisite exception.
+- docs/00-START-HERE.md — links and explicit proposed/inactive warning.
+- docs/06-Implementation/PROGRESS-LOG.md — this appended entry; earlier history retained.
+
+ADR-003 compares the six-app/five-package layout with existing instructions, structural sketch, API/sitemap/finance specifications and approved ADR-005. It proposes finance within Admin, host-only cookie boundaries, same-origin API ingress, private backend processes and CI separation. It explicitly warns that ports do not isolate cookies. Authentication implementation, detailed role/route maps, production infrastructure and business policies remain downstream decisions.
+
+The foundation proposal whitelists M1-T01 only and records a conditional, not-yet-effective exception to full Gate 0/ORM-before-M1 requirements. Activation requires separate topology/index/gate/scope/tooling/baseline/final-handoff/execution evidence. Proposed pins are Node 24.22.0 and pnpm 12.14.0, rechecked against official sources, not approved or installed. The scope describes eighteen possible implementation paths, with six app and five shared manifest placeholders and meaningful Node workspace tests; no such files are generated now. The final Task-Handoffs/M1-T01.md is intentionally absent.
+
+### Repository change observed outside this agent
+
+Initial snapshot: 53 documentation files and no Git repository; the earlier empty project placeholder was already absent. During preparation an external actor added the small root README.md and created .git on main, with observed commit e5bd5da26def292260292c026abd25ff4985ae54 and remote configuration. Read-only object inspection found 60 committed paths, including the new proposal documents. This agent did not initialize, stage, commit, configure a remote, push or create that README. Remote URL/credentials were not printed. Preserve the external state; do not reinitialize/rewrite it or infer approval from its commit.
+
+Git-Setup-Plan and current status now distinguish the original absence from the later external repository. The observed commit is not an accepted foundation baseline: ignore rules, approved scanner, staged-file review, operative artifact approvals and baseline adoption remain pending. Ordinary shell Git status/index verification is not claimed.
+
+### Author documentation verification
+
+PowerShell initially read the actual instructions/progress/specifications and captured file SHA-256 hashes. Later the shell failed to launch with CreateProcessAsUserW Access is denied, including read-only retries. An available JavaScript runtime's built-in filesystem/crypto/zlib readers completed non-mutating checks; no dependency was installed and no application/test source was generated.
+
+- All 277 canonical task IDs are unique and remain in original order versus the initial snapshot. Comparing current rows with the externally observed commit changes only M0-T03 and M0-T12; the other 275 task rows remain unchanged.
+- All 100 application feature rows exactly match the initial snapshot and remain NOT_STARTED.
+- Approved ADR-005, the complete Milestones file (M0–M12) and Readiness-Checklist match their initial SHA-256 hashes. G0-05 alone remains checked, with 34 outstanding requirements.
+- All six new documents have status PROPOSED and approval PENDING. Author checks found no broken wiki-link targets or malformed Markdown table column counts. The scope register lists exactly six app manifests and five shared manifests.
+- No original file was deleted or relocated. The working-file set contains the six agent-created Markdown proposals plus the externally added README. Final hash/history-prefix comparison is part of the session verification report; Git metadata is not misreported as an agent-created artifact.
+- Read-only repository heuristics found no high-confidence secret candidates, sensitive credential filenames or generated outputs; no application source/manifests/migrations exist. A current config check found no embedded HTTPS username/password URL pattern; this is not a comprehensive credential audit. Approved staged-content scanning/review remains required before adopting a baseline.
+- Final implementation handoff is absent. No package installation, database migration, service startup, deployment, application coding or Git write was performed by this agent. Application typecheck/runtime/build/security/concurrency tests are NOT APPLICABLE to these documentation drafts and are not claimed passed.
+
+### Remaining approvals and next action
+
+Request architecture/security review of ADR-003 and the foundation/scope/Git proposals, plus M0-T12 index/log verification. After a satisfactory review, Project Owner must explicitly accept the relevant documents/tasks and separately approve the exact gate scope and tooling. Git baseline adoption/scanner/provisioning, final handoff preparation/acceptance and eventual OpenCode execution each need their recorded authority. ADR-001/002/004 and all unapproved policies remain pending; no current prerequisite was silently removed. Stop after this documentation package.
+
+---

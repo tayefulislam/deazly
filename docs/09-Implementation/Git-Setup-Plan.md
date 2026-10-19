@@ -15,7 +15,9 @@ created: 2026-10-19
 
 ## 1. Inspected repository and sensitive-file evidence
 
-Project root: E:\Projects\deazly. Read-only git rev-parse reports no repository. At session start the inventory contained 53 files, all documentation (plus no application manifests/source/migrations); no .git or .gitignore existed. The prior report's empty project placeholder is absent in this session's actual baseline; it was not deleted by this task.
+Project root: E:\Projects\deazly. At session start read-only git rev-parse reported no repository, and the inventory contained 53 documentation files with no application manifests/source/migrations, .git or .gitignore. The prior report's empty project placeholder was already absent; it was not deleted by this task.
+
+During preparation, an external actor created .git, a root README containing only the project heading, and a main commit e5bd5da26def292260292c026abd25ff4985ae54. Read-only Git object inspection found 60 committed paths, including the six new proposal documents; remote configuration is present (URL/credentials deliberately not printed). This agent did not initialize, stage, commit, configure a remote or push. That commit is an observed candidate, not an approved or security-reviewed foundation baseline. Do not reinitialize, delete .git, replace the remote or rewrite the commit. Inspect/adopt the existing repository with owner authorization instead. Ordinary Git status/staged review is still required; shell launch later failed with Access is denied, so do not claim the working tree/index is clean.
 
 Scan the current complete file set again before Git execution, not just the earlier baseline. Check hidden files, .env variants, private-key/key-store/credential files, registry auth, database/provider connection strings, tokens and high-confidence credential patterns. Report paths/classifications, never secret values. Inspect Markdown and archived/update notes as well as code. A heuristic scan with no candidates is not a guarantee of no secrets or a substitute for an approved scanner and manual staged review. Runtime logs, uploads, private evidence, database dumps and generated outputs must not enter the baseline.
 
@@ -33,11 +35,11 @@ Verify both positive and negative ignore examples with git check-ignore after in
 
 1. Confirm root, full file inventory/hash snapshot, absence of ancestor/nested repositories, ownership and user changes. Confirm approved scanner, commit identity and exact initialization/commit scope. No remote is selected.
 2. Authorize/create only ignore rules; review them and the complete intended baseline. Any staging candidate with sensitive content blocks the commit.
-3. On explicit authorization run git init -b main in this root only. Do not initialize inside docs or create a nested marketplace repository. Inspect status; no application permission follows.
+3. Inspect the existing main repository and remote without exposing credentials. Do not run git init again. If this plan is reused where no repository exists, initialization requires a fresh explicit git init -b main authorization in this root only. Do not initialize inside docs or create a nested marketplace repository. Inspect status; no application permission follows.
 4. Stage an explicit reviewed allowlist: .gitignore, AGENTS.md, productStucture.md, UPDATE-NOTES.md and docs/. These include historical proposals as history, not as newly approved decisions. Inspect all candidates first; do not blindly git add . or silently rename the structural sketch.
 5. Review git diff --cached --name-status, --stat and --check and inspect the full staged patch locally without exposing credentials in shared logs. Run the approved scanner against the staged snapshot, not merely the working tree; record tool version, scope, exit result and redacted finding handling.
 6. Recheck task IDs, milestone structure, approval metadata, feature rows and historical progress. Obtain explicit authority for the initial commit and the intended author identity; do not guess or change global Git identity.
-7. Commit the sanitized architecture/planning baseline, proposed message docs(architecture): record planning baseline. Record the actual SHA/date and which documents remain PROPOSED. This commit may precede later approvals; it must not claim all decisions are approved.
+7. Review the existing candidate commit and, under explicit owner authority, adopt it or add a follow-up sanitized architecture/planning commit, proposed message docs(architecture): record planning baseline. Never amend/reset the external commit by inference. Record the accepted SHA/date and which documents remain PROPOSED. A commit may precede later approvals; it must not claim all decisions are approved.
 8. Before M1-T01 execution, separately commit authorized approval/governance/final-handoff updates if needed. Record the resulting final pre-code baseline SHA on a clean planned task branch; ensure it includes operative foundation approval. An unapproved draft-only commit is not sufficient activation evidence.
 
 No commit, tag, remote creation or push is implicit in this plan. No scanning download script, global Git configuration change or secret-bearing command line is authorized. An initial docs commit can occur without full Gate 0 if separately authorized; it never authorizes application coding.
@@ -57,5 +59,5 @@ For later workspace recovery use an approved revert of the exact task commit, pr
 - Project Owner approval for ignore creation/initialization: PENDING.
 - Scanner selection/provisioning and staged-review evidence: PENDING.
 - Initial commit author identity and commit authorization: PENDING.
-- Actual baseline SHA/date: NONE — Git not initialized.
+- Observed external main commit: e5bd5da26def292260292c026abd25ff4985ae54 (observed 2026-10-19); accepted pre-code baseline: PENDING review, ignore/scanner checks and applicable approvals.
 - Any remote/push/deployment permission: NOT GRANTED.

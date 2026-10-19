@@ -37,7 +37,7 @@ There is no authorization for any other M1 task or any M2–M12 task. M0 documen
 | Foundation gate approved | Owner/date, exact revision, whitelist, exclusions, exception text and expiration recorded | PENDING; PROPOSED/inactive |
 | Scope and pins approved | Exact M1-T01 file allowlist, acceptance/tests and Node/pnpm versions approved | PENDING |
 | Toolchain available safely | Approved binaries/versions verified, acquisition/provisioning separately authorized; no silent global/runtime download | PENDING; local Node differs from proposed pin |
-| Recoverable Git baseline | Separate Git/scanner/commit authorization, sanitized baseline commit SHA and clean planned task branch | PENDING; Git uninitialized |
+| Recoverable Git baseline | Explicit authorization to inspect/adopt the existing Git state, ignore/scanner checks, accepted baseline SHA and clean planned task branch | PENDING; Git appeared externally during preparation, but its baseline is not accepted or fully verified |
 | Governing references synchronized | Approved exception linked in operative instructions and task/gate tracking, without removing blanket rules | PENDING; no operative exception exists |
 | Final handoff and execution approved | Final reviewed Task-Handoffs/M1-T01.md created only after scope/prerequisite approval; explicit owner permission for OpenCode M1-T01 | PENDING; final handoff intentionally absent |
 
