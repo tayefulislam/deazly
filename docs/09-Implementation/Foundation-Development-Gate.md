@@ -1,0 +1,100 @@
+---
+tags: [governance, foundation, planning]
+status: PROPOSED
+approval: PENDING
+active: false
+decision_owner: Project Owner
+review_status: PENDING
+revision: 1
+created: 2026-10-19
+---
+# Foundation Development Gate — M1-T01 Only
+
+> [!danger] PROPOSED / INACTIVE — NO IMPLEMENTATION PERMISSION
+> Selecting Option B authorized this documentation package only. Original full Gate 0 remains NOT READY, with only G0-05 satisfied (1/35). The existing Gate 0 and ORM-before-M1 restrictions remain operative until a precisely recorded exception is approved and activated.
+
+## 1. Purpose, references and approval boundaries
+
+Permit safe, reversible private workspace initialization without waiting for unrelated commercial policies. Do not authorize an application skeleton, sensitive data handling, database behavior or domain implementation. References: [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]], approved [[05-Architecture/ADRs/ADR-005-Module-Boundaries]], [[05-Architecture/ADRs/ADR-Index]], [[05-Architecture/ADRs/Decision-Log]], [[09-Implementation/M1-T01-Scope-Proposal]], [[09-Implementation/Git-Setup-Plan]], [[09-Implementation/Task-Backlog]], [[09-Implementation/Readiness-Checklist]].
+
+Project Owner must review and approve this exact revision, its scope proposal and tooling policy. ADR approval, task verification/acceptance, gate approval, activation readiness, Git/tool provisioning authority and OpenCode execution permission are separate records. None is inferred from another. No new milestone/task ID or replacement Gate 0 is introduced.
+
+## 2. Exact implementation whitelist
+
+| Canonical task | Authorized extent if and only if activated |
+|---|---|
+| M1-T01 | Root pnpm workspace, six application/five shared private manifest placeholders, reproducible dependency-free lockfile, approved Node/pnpm pins, workspace-only tests, root README and Git ignore rules; exact file allowlist in the scope proposal |
+
+There is no authorization for any other M1 task or any M2–M12 task. M0 documentation work has its own authorization; it is not an implicit implementation extension. M1-T02 TypeScript, M1-T03 lint/import enforcement, M1-T04 Docker, M1-T05 ORM, M1-T23 API skeleton and M1-T25 CI are expressly outside this gate.
+
+## 3. Activation prerequisites — all must have evidence
+
+| Condition | Evidence required | Current state |
+|---|---|---|
+| ADR-003 accepted | Project Owner-approved ADR revision, required review evidence and M0-T03 VERIFIED then DONE | PENDING; draft only |
+| ADR-005 remains binding | Existing approved Revision 3 and M0-T05 DONE; no conflict introduced | Existing evidence retained |
+| ADR index/log accepted | Reviewed M0-T12 deliverables and explicit acceptance/DONE; missing decisions accurately identified | PENDING; IMPLEMENTED drafts |
+| Foundation gate approved | Owner/date, exact revision, whitelist, exclusions, exception text and expiration recorded | PENDING; PROPOSED/inactive |
+| Scope and pins approved | Exact M1-T01 file allowlist, acceptance/tests and Node/pnpm versions approved | PENDING |
+| Toolchain available safely | Approved binaries/versions verified, acquisition/provisioning separately authorized; no silent global/runtime download | PENDING; local Node differs from proposed pin |
+| Recoverable Git baseline | Separate Git/scanner/commit authorization, sanitized baseline commit SHA and clean planned task branch | PENDING; Git uninitialized |
+| Governing references synchronized | Approved exception linked in operative instructions and task/gate tracking, without removing blanket rules | PENDING; no operative exception exists |
+| Final handoff and execution approved | Final reviewed Task-Handoffs/M1-T01.md created only after scope/prerequisite approval; explicit owner permission for OpenCode M1-T01 | PENDING; final handoff intentionally absent |
+
+Gate approval can precede activation; it never bypasses missing conditions. Final handoff preparation does not require an already-running coding session: once the gate policy, topology, scope and required preparation are approved, write/review the final handoff; activate only when its acceptance and execution permission are recorded. Do not create a circular condition demanding prior task execution.
+
+## 4. Proposed exception text — NOT EFFECTIVE TODAY
+
+After Project Owner approval and all activation checks, record the following narrowly scoped exception in the governing documents:
+
+> Notwithstanding full Gate 0/M0-exit prerequisites and the blanket M0-T02 ORM-before-M1 requirement, only M1-T01 may initialize the approved private, dependency-free workspace under this Foundation Development Gate. M0-T03 remains a mandatory completed prerequisite. Pending auth, money, RBAC, route, design-token, ORM and business-policy decisions confer no permission to implement their capabilities. All other tasks retain their existing gates/dependencies. Original Gate 0 remains NOT READY until its own requirements are satisfied.
+
+Specific existing rules requiring future exception cross-references: AGENTS planning restrictions/current M1 blocker; docs/AGENTS and 00-START-HERE; 06-Implementation/Backlog scaffolding warning; Task-Backlog's full-Gate-0 rule, M0 exit and ORM/topology footer; Milestones M1 dependency on M0; Readiness-Checklist's Gate-0-before-scaffolding rule; Dependency-Graph's broader pre-scaffolding advisory edges. Do not delete or globally relax them. The generic dependency cell M1-T01 -> M0-T03 and all 277 task IDs remain unchanged. Future approved activation updates only M1-T01 readiness/authorization, not unrelated task states.
+
+This draft supersedes nothing. ADR-001/002/004 and other Gate 0 requirements remain unapproved. Only complete, independently evidenced items may be checked; gate approval alone does not satisfy them or complete M0/M1.
+
+## 5. Allowed and prohibited activities
+
+Allowed after activation: inspect baseline; create only approved metadata/manifest/test/README/ignore files; generate a lockfile with no third-party dependencies or lifecycle scripts; run the approved workspace checks; report results and exact diff. All manifests are private. Existing documentation remains at its current paths.
+
+Prohibited even if this gate is approved:
+
+- Next.js/NestJS/React application generators, src directories, UI pages, controllers, routes, health listeners, worker processors or framework/runtime dependency installation.
+- TypeScript/ESLint/shared-runtime implementations, Docker/services, migrations, ORM configuration, schemas, seed/reset commands or database connections.
+- Auth/RBAC/guest flows, money/commission/rounding, stock, checkout, payments, COD, journals, settlements, refunds, providers, advertising or analytics implementations.
+- Credentials, production/customer/vendor data, external provider calls, deployments, cloud resources, DNS/hosts/certificate changes or automatic toolchain provisioning.
+- Task-ID renumbering, changes to approved ADR-005, business rules, migrations, existing UI/API contracts or existing history.
+- Unapproved commits/pushes or central progress edits by competing tools. OpenCode reports evidence; only the explicitly authorized single tracking writer updates central records.
+
+## 6. Toolchain/version policy
+
+Proposed exact pins are Node.js 24.22.0 and pnpm 12.14.0, not approved versions. See the scope proposal for official sources and acquisition controls. Owner approval freezes the exact versions; recheck official release/security information before provisioning. Pin drift or a security finding requires review and an approved revision, not an automatic update. No framework/ORM/database version is selected by this gate.
+
+Use a pre-provisioned approved toolchain; version checks must precede writing manifests. Do not use latest tags, remote execution/install scripts, silent package-manager switching, lifecycle hooks, runtime provisioning or global machine changes. Only the dependency-free lockfile/install verification commands expressly approved in the final handoff are permitted.
+
+## 7. Verification and audit
+
+Before execution capture baseline commit, current branch/status, file hashes, 277 task IDs, all 100 feature rows, ADR-005 hash and exact approved scope/toolchain. Stop on conflicting user changes. Record final handoff revision and approvals without storing credentials.
+
+Required task checks: exactly eleven non-root workspaces at approved paths; unique names/private flags; exact pins; no dependency or install-hook additions; lockfile covers approved importers; frozen install is repeatable; meaningful workspace tests and negative fixtures pass; planned diff/ignore/secret checks pass; no prohibited file/activity. Test definitions are specified, not executed by this document. Full lint/typecheck/framework builds and DB/security concurrency tests remain later tasks; do not manufacture no-op scripts to claim they pass.
+
+Record commands, exit codes, tool versions, diff/change manifest, baseline and final commit references if authorized, review findings and actual task transition evidence. Scope breach/test failure means stop and review—not task DONE. After successful review, task verification and explicit acceptance follow Task-Status-Policy; all application feature rows remain NOT_STARTED.
+
+## 8. Git baseline and rollback
+
+Follow the separately approved Git setup plan before coding. The baseline must include the reviewed planning state and applicable approvals, with no secrets or generated outputs. No Git initialization/commit is authorized by this draft. Final handoff publication may be a subsequent approved docs commit; record the resulting exact pre-code baseline SHA.
+
+For committed task changes, propose a reviewed revert of that exact task commit, preserving the architecture baseline and unrelated changes. For uncommitted changes, inspect the per-file change manifest and restore only task-owned paths under explicit rollback authority; preserve modified pre-existing files and user changes. Never recursively remove the repository, use reset --hard/git clean, delete .git or purge a shared pnpm store. No database rollback is relevant because migrations are forbidden. Keep failed verification/recovery history.
+
+## 9. Expiration / revocation
+
+This single-task permission expires when M1-T01 is accepted/DONE, Project Owner revokes it, approved scope/toolchain/architecture changes, a material security defect is found, or the verified baseline no longer matches the planned work. Stop before further mutations and seek renewed review. It never rolls forward to M1-T02 or any other task. No arbitrary time duration is invented.
+
+## 10. Approval record
+
+- Architecture/security review identity/date/verdict: PENDING.
+- Project Owner approval/date and exact revision: PENDING.
+- Scope/tooling/Git authority and evidence links: PENDING.
+- Final handoff review and execution authority: PENDING.
+- Activation check evidence/date: PENDING; active=false.
+- Original Gate 0: NOT READY, 1/35; not replaced by this proposal.
