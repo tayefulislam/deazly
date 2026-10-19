@@ -62,3 +62,14 @@ Record the reviewer identity/date/verdict, findings and exact approved artifact 
 - Git: existing repository preserved at observed HEAD `ddd8d1a0e46f2e0badaaa0253425bd5f789a6f91` on `main`, origin configured; no commit or push. `.gitignore` prepared. Gitleaks v8.30.0 selected for pinned scanning; it was not available in checked conventional locations and no scan was run because host command execution was unavailable. Git baseline acceptance remains PENDING.
 - Handoff: [[09-Implementation/Task-Handoffs/M1-T01]] prepared for review, explicitly NOT AUTHORIZED FOR EXECUTION. No application coding or task M1-T01 status change is authorized by these approvals.
 - Supersession: no change to ADR-001, ADR-002, ADR-004, approved ADR-005, canonical task IDs or M0–M12 milestones.
+
+## 2026-10-19 — M1-T01 activation, M1-T02 exception and configuration ratification
+
+- Decision owner: Project Owner.
+- Scope of this entry: it supersedes **only the current-status wording** of the preceding 2026-10-19 entry (notably the "NOT AUTHORIZED FOR EXECUTION" statement). The earlier record is preserved unchanged as historical approval chronology; history is not rewritten or erased.
+- M1-T01: Foundation Development Gate Revision 1 was activated on 2026-10-19. [[09-Implementation/Task-Handoffs/M1-T01]] is AUTHORIZED and executed; M1-T01 is IMPLEMENTED pending independent review and final task acceptance.
+- M1-T02: a narrowly scoped section 11 exception ([[09-Implementation/Foundation-Development-Gate]]) was APPROVED and made EFFECTIVE on 2026-10-19 — the M1-T01-acceptance precondition was explicitly waived and M1-T01 kept IMPLEMENTED. M1-T02 is IMPLEMENTED pending independent review.
+- Configuration ratification: the Project Owner approved M1-T02 decisions D4–D8 — project references/`composite` excluded; `exactOptionalPropertyTypes` enabled; `noUncheckedIndexedAccess` and `noUnusedParameters` enabled; `skipLibCheck: false`; package-root `@deazly/<pkg>` aliases only — and accepted the M1-T01 `pmOnFail: ignore` deviation with its external version controls. Exact values are recorded in [[09-Implementation/Task-Handoffs/M1-T02]] §10.
+- M1-T03: preparation of a narrowly scoped ESLint/Prettier/import-boundary exception was authorized on 2026-10-19; the exception text and its toolchain pins require explicit Project Owner ratification before the exception is activated.
+- Gate status: full Gate 0 remains NOT READY (4/35). No ADR-001, ADR-002 or ADR-004 decision is changed. Ratifying configuration values is **not** independent review.
+- Git: the existing repository is preserved. HEAD `7c7f9bd` (M1-T01 + M1-T02) is not rewritten, amended, rebased, reset or force-pushed; its message may be corrected only by a separately authorized follow-up commit.

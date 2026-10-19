@@ -24,12 +24,7 @@ const EXPECTED_WORKSPACES = [
   { path: "packages/validation", name: "@deazly/validation" },
   { path: "packages/config", name: "@deazly/config" },
 ];
-const DEPENDENCY_FIELDS = [
-  "dependencies",
-  "devDependencies",
-  "peerDependencies",
-  "optionalDependencies",
-];
+const DEPENDENCY_FIELDS = ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"];
 const FORBIDDEN_SCRIPTS = ["preinstall", "install", "postinstall", "prepare"];
 
 // --- Pure helpers (exercised with real repository data and negative fixtures) ---
@@ -123,7 +118,7 @@ const rootManifest = JSON.parse(readFileSync(join(REPO_ROOT, "package.json"), "u
 const nodeVersionFile = readFileSync(join(REPO_ROOT, ".node-version"), "utf8");
 const discoveredPaths = expandWorkspaceGlobs(REPO_ROOT, parseWorkspaceGlobs(workspaceYaml));
 const discoveredManifests = discoveredPaths.map((p) =>
-  JSON.parse(readFileSync(join(REPO_ROOT, p, "package.json"), "utf8"))
+  JSON.parse(readFileSync(join(REPO_ROOT, p, "package.json"), "utf8")),
 );
 
 describe("workspace configuration", () => {
@@ -134,7 +129,7 @@ describe("workspace configuration", () => {
   test("discovers exactly the eleven approved workspaces", () => {
     const result = compareWorkspaceSet(
       discoveredPaths,
-      EXPECTED_WORKSPACES.map((w) => w.path)
+      EXPECTED_WORKSPACES.map((w) => w.path),
     );
     assert.deepEqual(result.missing, [], "missing workspaces");
     assert.deepEqual(result.extra, [], "unexpected workspaces");
@@ -144,9 +139,7 @@ describe("workspace configuration", () => {
 
   test("every workspace manifest is private, uniquely named and version 0.0.0", () => {
     for (const expected of EXPECTED_WORKSPACES) {
-      const manifest = JSON.parse(
-        readFileSync(join(REPO_ROOT, expected.path, "package.json"), "utf8")
-      );
+      const manifest = JSON.parse(readFileSync(join(REPO_ROOT, expected.path, "package.json"), "utf8"));
       assert.deepEqual(validateWorkspaceManifest(manifest, expected.name), [], expected.path);
     }
     assert.deepEqual(findDuplicateNames(discoveredManifests), []);
@@ -184,15 +177,25 @@ describe("root manifest and toolchain pins", () => {
         packageManager: rootManifest.packageManager,
         engines: rootManifest.engines,
       }),
-      []
+      [],
     );
   });
 
-  test("root manifest declares only the approved TypeScript dev dependency", () => {
+  test("root manifest declares only the approved toolchain dev dependencies", () => {
     for (const field of ["dependencies", "peerDependencies", "optionalDependencies"]) {
       assert.equal(rootManifest[field] ?? undefined, undefined, field);
     }
-    assert.deepEqual(rootManifest.devDependencies, { typescript: "6.0.3" });
+    assert.equal(rootManifest.devDependencies?.typescript, "6.0.3");
+    const allowed = [
+      "@eslint/js",
+      "eslint",
+      "eslint-config-prettier",
+      "globals",
+      "prettier",
+      "typescript",
+      "typescript-eslint",
+    ];
+    assert.deepEqual(Object.keys(rootManifest.devDependencies ?? {}).sort(), allowed);
   });
 });
 
@@ -203,17 +206,14 @@ describe("negative fixtures (pure, isolated from repository files)", () => {
   });
 
   test("rejects a public (non-private) manifest", () => {
-    const problems = validateWorkspaceManifest(
-      { name: "@deazly/ui", version: "0.0.0", private: false },
-      "@deazly/ui"
-    );
+    const problems = validateWorkspaceManifest({ name: "@deazly/ui", version: "0.0.0", private: false }, "@deazly/ui");
     assert.ok(problems.includes("private must be true"));
   });
 
   test("rejects a manifest with a third-party dependency", () => {
     const problems = validateWorkspaceManifest(
       { name: "@deazly/ui", version: "0.0.0", private: true, dependencies: { react: "19.0.0" } },
-      "@deazly/ui"
+      "@deazly/ui",
     );
     assert.ok(problems.includes("must not declare dependencies"));
   });
@@ -221,7 +221,7 @@ describe("negative fixtures (pure, isolated from repository files)", () => {
   test("rejects a manifest with an install lifecycle hook", () => {
     const problems = validateWorkspaceManifest(
       { name: "@deazly/ui", version: "0.0.0", private: true, scripts: { postinstall: "node x.js" } },
-      "@deazly/ui"
+      "@deazly/ui",
     );
     assert.ok(problems.includes("must not define postinstall"));
   });

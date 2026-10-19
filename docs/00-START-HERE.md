@@ -65,9 +65,11 @@ No live payments until vendor isolation, oversell prevention, idempotent webhook
 
 > [!important] Start with the audit
 > The planning set concludes that full implementation is **not ready** until Gate 0 in
-> [[09-Implementation/Readiness-Checklist]] is signed off. Gate 0 remains NOT READY;
-> only M1-T01 may be considered under the separately approved, currently inactive
-> [[09-Implementation/Foundation-Development-Gate]].
+> [[09-Implementation/Readiness-Checklist]] is signed off. Gate 0 remains NOT READY (4/35);
+> the [[09-Implementation/Foundation-Development-Gate]] is **ACTIVE for M1-T01** and its
+> section 11 exception is **EFFECTIVE for M1-T02**, with section 12 **EFFECTIVE for M1-T03**.
+> All three tasks are IMPLEMENTED pending independent review. M1-T04 and every later task
+> remain unauthorized.
 
 ## 2026-10-19 — Planning reconciliation
 
@@ -79,13 +81,13 @@ No live payments until vendor isolation, oversell prevention, idempotent webhook
 - Feature coverage gaps: [[09-Implementation/Feature-Coverage-Gaps]].
 - Operational progress: [[06-Implementation/PROJECT-STATUS]] and [[06-Implementation/CURRENT-SPRINT]].
 
-## Foundation Development Approval Package — approved, gate inactive
+## Foundation Development Approval Package — approved; gate active (M1-T01) with effective M1-T02 and M1-T03 exceptions
 
 - [[05-Architecture/ADRs/ADR-003-Application-and-Deployment-Topology]] — six-app/finance-in-Admin topology, APPROVED Revision 1.
 - [[05-Architecture/ADRs/ADR-Index]] and [[05-Architecture/ADRs/Decision-Log]] — accepted M0-T12 deliverables, DONE.
-- [[09-Implementation/Foundation-Development-Gate]] — APPROVED M1-T01-only exception; inactive until all activation conditions pass.
+- [[09-Implementation/Foundation-Development-Gate]] — ACTIVATED for M1-T01 on 2026-10-19; section 11 M1-T02 exception EFFECTIVE; section 12 M1-T03 exception EFFECTIVE for M1-T03 only.
 - [[09-Implementation/M1-T01-Scope-Proposal]] — approved scope and toolchain pins; not execution permission.
-- [[09-Implementation/Git-Setup-Plan]] — existing Git repository preserved; baseline scan/status acceptance pending.
-- [[09-Implementation/Task-Handoffs/M1-T01]] — prepared, NOT AUTHORIZED FOR EXECUTION.
+- [[09-Implementation/Git-Setup-Plan]] — existing Git repository preserved; docs-only baseline `b1d26ab` recorded; Gitleaks v8.30.0 history and working-tree scans clean.
+- [[09-Implementation/Task-Handoffs/M1-T01]] — AUTHORIZED and executed; M1-T01 IMPLEMENTED pending independent review.
 
-M0-T03 and M0-T12 are DONE as accepted documentation. Gate 0 remains NOT READY (4/35); M1-T01 remains BLOCKED. The approved foundation gate has not been activated. No tools were installed and no application coding was authorized.
+M0-T03 and M0-T12 are DONE as accepted documentation. Gate 0 remains NOT READY (4/35); M1-T01, M1-T02 and M1-T03 are IMPLEMENTED pending independent review. The Foundation Development Gate is ACTIVE for M1-T01 with effective section 11 and section 12 exceptions for M1-T02 and M1-T03 respectively; Node 24.22.0, pnpm 12.14.0, TypeScript 6.0.3, ESLint 10.13.0 and Prettier 3.9.10 are provisioned, and no marketplace business logic has been implemented.

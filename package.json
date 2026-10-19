@@ -9,12 +9,23 @@
     "pnpm": "12.14.0"
   },
   "scripts": {
-    "test": "node --test tests/workspace/workspace.test.mjs tests/typescript/typescript.test.mjs",
+    "test": "node --test tests/workspace/workspace.test.mjs tests/typescript/typescript.test.mjs tests/lint/lint.test.mjs",
     "test:workspace": "node --test tests/workspace/workspace.test.mjs",
     "test:typescript": "node --test tests/typescript/typescript.test.mjs",
+    "test:lint": "node --test tests/lint/lint.test.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit -p apps/storefront/tsconfig.json && tsc --noEmit -p apps/vendor/tsconfig.json && tsc --noEmit -p apps/admin/tsconfig.json && tsc --noEmit -p apps/warehouse/tsconfig.json && tsc --noEmit -p apps/api/tsconfig.json && tsc --noEmit -p apps/worker/tsconfig.json && tsc --noEmit -p packages/database/tsconfig.json && tsc --noEmit -p packages/ui/tsconfig.json && tsc --noEmit -p packages/contracts/tsconfig.json && tsc --noEmit -p packages/validation/tsconfig.json && tsc --noEmit -p packages/config/tsconfig.json"
   },
   "devDependencies": {
-    "typescript": "6.0.3"
+    "@eslint/js": "10.0.1",
+    "eslint": "10.13.0",
+    "eslint-config-prettier": "10.1.8",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2"
   }
 }

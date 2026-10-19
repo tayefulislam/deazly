@@ -601,7 +601,7 @@ NOT ALLOWED without explicit instruction:
 - Create production infrastructure
 - Replace approved architecture
 
-Approved narrow exception: `docs/09-Implementation/Foundation-Development-Gate.md` Revision 1 permits **M1-T01 only** after every activation prerequisite is verified, the gate is recorded active, and a final handoff plus explicit OpenCode permission is accepted. The gate is currently inactive. Full Gate 0 remains NOT READY; no other implementation task is permitted by this exception.
+Approved narrow exceptions: `docs/09-Implementation/Foundation-Development-Gate.md` Revision 1 activates the gate for **M1-T01 only** after every activation prerequisite is verified, and its section 11 and section 12 exceptions separately authorize **M1-T02** and **M1-T03 only**. The gate is **active** and all three of M1-T01, M1-T02 and M1-T03 are **IMPLEMENTED** pending independent review and Project Owner acceptance. No exception rolls forward: M1-T04 and every later task remain unauthorized. Full Gate 0 remains NOT READY (4/35).
 
 Planning documents are not evidence that the features have been implemented.
 
@@ -923,7 +923,7 @@ at the same time.
 ---
 ## Deazly Canonical Milestone Reconciliation (2026-10-19)
 
-> [!warning] Planning status — Gate 0 remains NOT READY; the approved M1-T01-only exception is inactive.
+> [!warning] Planning status — Gate 0 remains NOT READY (4/35); the active Foundation Development Gate authorizes M1-T01 only, with separate section 11 (M1-T02) and section 12 (M1-T03) task-specific exceptions. M1-T01, M1-T02 and M1-T03 are IMPLEMENTED pending independent review; M1-T04+ remain unauthorized.
 
 - Canonical milestone IDs: **M0–M12** in `docs/09-Implementation/Milestones.md`.
 - Canonical detailed task IDs: **M<n>-T<nn>** in `docs/09-Implementation/Task-Backlog.md`.
@@ -932,8 +932,8 @@ at the same time.
 - Task lifecycle: `NOT_STARTED`, `READY`, `IN_PROGRESS`, `BLOCKED`, `IMPLEMENTED`, `VERIFIED`, `DONE`. Review verdict `ACCEPT/REVISE/BLOCKED` is separate.
 - ADR-005 Revision 3 is **APPROVED** by Project Owner on 2026-10-19; M0-T05 is **DONE** as a verified and accepted planning deliverable, not application implementation. See `docs/06-Implementation/PROGRESS-LOG.md` for verification and approval evidence.
 - M0-T03 ADR-003 and M0-T12 ADR index/log are **DONE** as accepted documentation tasks; ADR-003 Revision 1 is **APPROVED**. `docs/05-Architecture/ADRs/ADR-Index.md` and `Decision-Log.md` record evidence. M0-T05 / ADR-005 Revision 3 remains **DONE / APPROVED**.
-- The Project Owner approved `docs/09-Implementation/Foundation-Development-Gate.md` Revision 1, restricted to M1-T01; it remains **INACTIVE** until every activation prerequisite passes. Gate 0 remains NOT READY (G0-03, G0-05, G0-06, G0-24 satisfied; 4/35). M1-T01 remains BLOCKED pending Git, toolchain, governance and handoff checks. No other implementation is authorized.
-- ADR-001, ADR-002 and ADR-004 and downstream policies remain pending. Application development is not authorized until the Foundation Gate is activated and M1-T01 receives separate execution permission.
+- The Project Owner approved `docs/09-Implementation/Foundation-Development-Gate.md` Revision 1, restricted to M1-T01, and it is **ACTIVE** (activated 2026-10-19). Separate task-specific exceptions are **EFFECTIVE** for M1-T02 (section 11) and M1-T03 (section 12). M1-T01, M1-T02 and M1-T03 are **IMPLEMENTED** pending independent review and acceptance; none is VERIFIED/DONE. Gate 0 remains NOT READY (G0-03, G0-05, G0-06, G0-24 satisfied; 4/35), and M1-T04 and every later task remain BLOCKED and unauthorized.
+- ADR-001, ADR-002 and ADR-004 and downstream policies remain pending. Application development beyond the three task-specific exceptions is not authorized until the Foundation Gate is activated for it and separate execution permission is granted.
 - Preserve the existing Git repository. The observed `main`/`origin/main` candidate is recorded in `docs/09-Implementation/Git-Setup-Plan.md`; the baseline is not accepted until native status, ignore and pinned secret-scanner checks pass.
 - Read `docs/09-Implementation/Feature-Coverage-Gaps.md` before declaring any milestone complete.
 - Never reinterpret an at-least-once outbox dispatcher as exactly-once delivery; consumers must be idempotent.

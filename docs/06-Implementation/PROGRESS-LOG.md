@@ -602,3 +602,82 @@ M1-T01 **IMPLEMENTED** (unchanged; no acceptance fabricated). M1-T02 **IMPLEMENT
 Next: independent review of the M1-T02 diff/evidence and Project Owner acceptance; then decide on the M1-T01/M1-T02 commit and only afterward consider authorizing M1-T03.
 
 ---
+
+## 2026-10-19 — M1-T03 shared lint, formatting and import boundaries
+
+### Preconditions and authorization
+
+Project Owner authorized M1-T03 preparation and directed implementation once its task-specific gate exception and dependencies were satisfied. `docs/09-Implementation/Foundation-Development-Gate.md` §12 was added as an **M1-T03-only** exception (EFFECTIVE 2026-10-19, non-rolling), with the pin table in §12.1 and the ADR-005 boundary mapping in §12.2. Dependencies M1-T01 (private workspace) and M0-T05/ADR-005 Revision 3 (APPROVED) are satisfied. Full Gate 0 remains NOT READY (4/35); ADR-001, ADR-002 and ADR-004 remain pending.
+
+### Implementation (M1-T03)
+
+- Added root flat `eslint.config.mjs`: `@eslint/js` recommended + `typescript-eslint` recommended (non-type-aware), JS/TS blocks, and path-scoped boundary groups derived from ADR-005 (browser, server, contracts, validation, neutral and global application bans). `eslint-config-prettier` is applied last.
+- Added `.prettierrc.json` (`printWidth: 120`, double quotes, semicolons, `trailingComma: "all"`) and `.prettierignore` (excludes `docs/`, `*.md`, `node_modules/`, `.pnpm/`, `pnpm-lock.yaml` to avoid mass documentation reformatting).
+- Added exact pins: `eslint@10.13.0`, `@eslint/js@10.0.1`, `typescript-eslint@8.71.2`, `globals@17.13.0`, `eslint-config-prettier@10.1.8`, `prettier@3.9.10`.
+- Added `lint`, `lint:fix`, `format`, `format:check`, `test:lint`; extended `test` to include `tests/lint/lint.test.mjs`.
+- Added `tests/lint/lint.test.mjs` (17 tests): pin/installed-version assertions, 8 negative boundary fixtures, 4 positive fixtures, config-shape checks.
+- Updated the root-dependency assertions in `tests/workspace/workspace.test.mjs` and `tests/typescript/typescript.test.mjs` to the approved toolchain set; Prettier reformatted those two test files and `eslint.config.mjs` (formatting only).
+- Documented lint/format usage in `README.md`.
+
+Exact lockfile SHA-256: `D2BF2FA61C0C73BC57CCF78B8D2631C737AF2F47D3736F14EA6315A29822CAC1`.
+
+### Verification evidence
+
+| Command | Result |
+|---|---|
+| `pnpm run lint` | exit 0 (repository clean) |
+| `pnpm run format:check` | exit 0 (all matched files formatted) |
+| `pnpm run typecheck` | exit 0 (all eleven configs) |
+| `node --test tests/lint/lint.test.mjs` | 17 pass / 0 fail, exit 0 |
+| `pnpm test` | 73 pass / 0 fail, exit 0 (workspace 13, TypeScript 43, lint 17) |
+| `pnpm install --frozen-lockfile --offline --ignore-scripts --no-runtime` | exit 0 |
+| `git diff --check` | exit 0 (benign LF→CRLF warnings only) |
+
+### Deviations recorded
+
+- Formatting is limited to code/config; documentation is ignored to prevent mass Markdown rewrites.
+- ESLint runs syntax/scope-level rules only (not type-aware) to keep lint fast and framework-free; type correctness is covered by `typecheck`.
+- The two earlier test files were updated solely to acknowledge the new approved root devDependencies; their other assertions are unchanged.
+- The D4–D8 configuration choices and the `pmOnFail: ignore` deviation were ratified by the Project Owner on 2026-10-19; this supersedes the M1-T02 entry's note that D4–D8 were still proposed defaults.
+
+### Status
+
+M1-T03 **IMPLEMENTED — not VERIFIED/DONE**; independent review and Project Owner acceptance outstanding. M1-T01 and M1-T02 remain **IMPLEMENTED** (no acceptance fabricated). No M1-T04+ work, no commit and no push were performed. 277 task IDs and all 100 feature rows unchanged; no application capability, framework, ORM, migration, CI or infrastructure was added.
+
+Next: independent review of the M1-T03 diff/evidence; then decide on committing M1-T01/T02/T03 after acceptance. M1-T04 remains BLOCKED and unauthorized.
+
+---
+
+## 2026-10-19 — M1-T01/T02/T03 review-corrections pass (Codex verdict: REVISE)
+
+### Trigger
+
+Codex reviewed M1-T01, M1-T02 and M1-T03 and returned **REVISE**. The Project Owner authorized a focused correction pass on the four findings. No architecture was restarted and no completed foundation was rebuilt.
+
+### Resolution of findings
+
+1. **Synchronized gate instructions.** Corrected stale text that described the Foundation Development Gate as inactive or M1-T01-only in `AGENTS.md`, `docs/AGENTS.md`, `docs/09-Implementation/Foundation-Development-Gate.md`, `docs/09-Implementation/Readiness-Checklist.md` and `docs/09-Implementation/Task-Backlog.md`. The gate is now consistently recorded as **ACTIVE for M1-T01** with §11 **EFFECTIVE for M1-T02** and §12 **EFFECTIVE for M1-T03**; all three are IMPLEMENTED pending review. Full Gate 0 remains NOT READY (4/35) and M1-T04 remains BLOCKED. No approval evidence was invented or expanded.
+2. **Approved M1-T03 pins.** The Project Owner explicitly approved `eslint@10.13.0`, `@eslint/js@10.0.1`, `typescript-eslint@8.71.2`, `globals@17.13.0`, `eslint-config-prettier@10.1.8`, `prettier@3.9.10`. Recorded in the M1-T03 handoff §3/§6, Foundation Development Gate §12/§12.1 and this log. Pins remain exact; the lockfile is unchanged and no dependency was added.
+3. **ADR-005 boundary clarity and literal dynamic imports.** Static imports/exports were already enforced via `@typescript-eslint/no-restricted-imports`; a probe confirmed literal `import("…")` was **not** covered. Literal dynamic imports are now enforced with the built-in `no-restricted-syntax` rule (selectors derived from the same ban groups) and covered by 6 negative and 3 positive fixtures plus a limitation test. The enforced-versus-deferred matrix (resolved module graph, non-literal dynamic imports, NestJS DI/provider graphs, cross-owner SQL) is documented in M1-T03 handoff §14 and Gate §12.3; the deferred checks have no existing task ID and must be added under new IDs later. No restriction was weakened and no plugin was added.
+4. **Reconciled M1-T02 scope label.** The M1-T02 backlog title said "project references"; the approved scope (decision D4) excludes `composite`/project references. The canonical ID is preserved, the title now states the approved scope, and a reconciliation note records the difference. No project references were added; the TypeScript architecture is unchanged.
+
+### Verification evidence
+
+| Command | Result |
+|---|---|
+| `node --version` | v24.22.0 |
+| `pnpm --version` | 12.14.0 |
+| `pnpm run lint` | exit 0 |
+| `pnpm run format:check` | exit 0 |
+| `pnpm run typecheck` | exit 0 (eleven configs) |
+| `pnpm test` | 84 pass / 0 fail, exit 0 (workspace 13, TypeScript 43, lint 28) |
+| `pnpm install --frozen-lockfile --offline --ignore-scripts --no-runtime` | exit 0 |
+| `git diff --check` | exit 0 |
+
+Lockfile SHA-256 unchanged: `D2BF2FA61C0C73BC57CCF78B8D2631C737AF2F47D3736F14EA6315A29822CAC1`.
+
+### Status
+
+M1-T01, M1-T02 and M1-T03 remain **IMPLEMENTED** pending independent review and Project Owner acceptance; none is VERIFIED/DONE. Review verdict REVISE addressed by this pass. Gate 0 remains NOT READY (4/35). All 277 task IDs, the approved ADRs and all 100 NOT_STARTED application features are unchanged. No commit, push, merge or deployment occurred and M1-T04 was not started.
+
+---

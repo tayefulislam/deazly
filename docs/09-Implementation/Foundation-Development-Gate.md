@@ -10,11 +10,14 @@ created: 2026-10-19
 approval_date: 2026-10-19
 activation_date: 2026-10-19
 ---
-# Foundation Development Gate — M1-T01 Only
+# Foundation Development Gate — M1-T01 activation with M1-T02 and M1-T03 task-specific exceptions
 
-> [!important] APPROVED / ACTIVE — M1-T01 ONLY
+> [!important] APPROVED / ACTIVE — M1-T01, WITH EFFECTIVE SECTION 11 (M1-T02) AND SECTION 12 (M1-T03) EXCEPTIONS
 > The Project Owner approved Revision 1 on 2026-10-19 and explicitly authorized OpenCode execution of M1-T01 only in the same instruction (activation recorded 2026-10-19). Every activation prerequisite in section 3 is satisfied. This gate authorizes only M1-T01 workspace initialization; it does not authorize an application skeleton, TypeScript/lint setup, Docker, ORM, API or worker code. Full Gate 0 remains NOT READY (4/35 satisfied); all other M1+ work remains gated by the original requirements, and this gate never rolls forward to M1-T02 or any later task.
 > Amendment (2026-10-19): a separate, narrowly scoped **M1-T02 exception** was approved — see section 11. It was subsequently made **effective for M1-T02** after the Project Owner explicitly waived the M1-T01-acceptance precondition and all M1-T02 prerequisites were verified; it does not alter any statement above.
+> Amendment (2026-10-19): a separate, narrowly scoped **M1-T03 exception** was approved — see section 12 — and is **effective for M1-T03** (M1-T01 and M0-T05/ADR-005 satisfied). Its exact pins (§12.1) and boundary mapping (§12.2) are recorded there.
+>
+> **Consolidated current status (2026-10-19):** this gate is **ACTIVE for M1-T01**; §11 is **EFFECTIVE for M1-T02** and §12 is **EFFECTIVE for M1-T03**. All three tasks are **IMPLEMENTED**, pending independent review and Project Owner acceptance — none is VERIFIED/DONE. The sections 1–10 restriction of the M1-T01 gate to M1-T01 remains historically accurate for that gate and does not limit the separate §11/§12 exceptions. Full Gate 0 remains NOT READY (4/35), and M1-T04 and every later task remain BLOCKED and unauthorized.
 
 ## 1. Purpose, references and approval boundaries
 
@@ -124,5 +127,50 @@ Approval record:
 
 - Project Owner authorization/date: APPROVED 2026-10-19 ("DEAZLY — AUTHORIZE AND IMPLEMENT M1-T02"), limited to M1-T02.
 - Effectiveness: **EFFECTIVE 2026-10-19** — M1-T01-acceptance precondition explicitly waived by the Project Owner; M1-T02 prerequisites verified. M1-T01 remains IMPLEMENTED.
+- Configuration decisions: D4–D8 of [[09-Implementation/Task-Handoffs/M1-T02]] were ratified by the Project Owner on 2026-10-19 (exact values recorded in that handoff §10), and the M1-T01 `pmOnFail: ignore` deviation with its external version controls was accepted. Ratification of configuration values is not independent review.
+
+## 12. M1-T03 exception — ESLint, Prettier and import-boundary rules (AUTHORIZED 2026-10-19; EFFECTIVE for M1-T03 only)
+
+> [!warning] AUTHORIZED — M1-T03 ONLY (PINS EXPLICITLY APPROVED BY PROJECT OWNER)
+> The Project Owner authorized preparation of this exception and directed implementation once its dependencies were satisfied on 2026-10-19 ("Approve Foundation Decisions and Start M1-T03"). M1-T01 and M0-T05/ADR-005 are satisfied, so the exception is **effective for M1-T03 only**. It never rolls forward to M1-T04 or any later task, and full Gate 0 remains NOT READY (4/35) (or later). The exact pins in §12.1 were **explicitly approved by the Project Owner on 2026-10-19** in the M1-T03 review-corrections instruction ("I explicitly approve the following exact M1-T03 dependency versions"); no additional dependency is authorized.
+
+| Field | Record |
+|---|---|
+| Task | M1-T03 — "Add shared ESLint + Prettier + import-boundary rules per ADR-005" ([[09-Implementation/Task-Backlog]]) |
+| Scope | One root flat ESLint config, one shared Prettier config plus ignore rules, root `lint`/`format`/`format:check` scripts, Node built-in positive/negative linting tests, exact dependency pins and lockfile updates |
+| Explicitly excluded | M1-T04 Docker, M1-T05 ORM/migrations, M1-T07/T08 contracts/validation, M1-T23 API skeleton, M1-T25 CI and every M2–M12 task; no marketplace business logic, no framework initialization (Next.js/NestJS/React), no change to TypeScript strictness or the eleven workspace names |
+| Dependencies | M1-T01 (IMPLEMENTED) and M0-T05 / ADR-005 Revision 3 (APPROVED, DONE) — both satisfied at the workspace level |
+| Prerequisites | (1) Project Owner authorization of this exception — recorded; (2) dependencies M1-T01 and M0-T05 satisfied; (3) exact pins in §12.1 **explicitly approved by the Project Owner (2026-10-19)** |
+| Effectivity | **EFFECTIVE 2026-10-19 for M1-T03 only**; status advances to IMPLEMENTED after changes exist |
+| Expiration / revocation | Same model as section 9: expires when M1-T03 is accepted/DONE, is revoked, approved scope/pins change, a security defect is found, or the verified baseline drifts. Never rolls forward to M1-T04+ |
+| References | [[09-Implementation/Task-Handoffs/M1-T03]] |
+
+### 12.1 Approved dependency pins (exact root devDependencies — Project Owner approved 2026-10-19)
+
+| Package | Approved exact pin | Purpose |
+|---|---|---|
+| `eslint` | `10.13.0` | Linter engine, flat config only |
+| `@eslint/js` | `10.0.1` | ESLint recommended JS rule set |
+| `typescript-eslint` | `8.71.2` | TypeScript-aware parser and rules (peer `eslint ^8.57 \|\| ^9 \|\| ^10`, `typescript >=4.8.4 <6.1.0` — satisfied by `6.0.3`) |
+| `globals` | `17.13.0` | Environment global definitions |
+| `eslint-config-prettier` | `10.1.8` | Disables lint rules that conflict with Prettier |
+| `prettier` | `3.9.10` | Formatter |
+
+These are the only dependencies M1-T03 may add; `typescript@6.0.3` remains the sole pre-existing dev dependency. The Project Owner explicitly approved these exact versions on 2026-10-19; no additional dependency is authorized. No boundary plugin is added — boundary enforcement uses ESLint built-in / `typescript-eslint` `no-restricted-imports` patterns plus a built-in `no-restricted-syntax` rule for literal dynamic imports.
+
+### 12.2 Boundary mapping (ADR-005 sections 3 and 14)
+
+- Applications import only public `@deazly/*` package entry points; deep/private subpaths (`@deazly/*/src/**`) are banned.
+- Shared packages never import applications; `packages/contracts` and `packages/validation` stay framework-neutral.
+- Browser workspaces (`storefront`, `vendor`, `admin`, `warehouse`, `ui`) must not import server-only packages (`database`, `config`).
+- Server workspaces must not import the browser-only `ui` package.
+- **Static imports and exports** are enforced now with `@typescript-eslint/no-restricted-imports`.
+- **Literal dynamic imports** (`import("…")` with a string literal) are enforced now with the built-in `no-restricted-syntax` rule, using the same ban groups.
+- **Non-literal dynamic imports** (computed specifiers), resolved module-graph/alias/barrel analysis and NestJS DI/provider-graph checks are **not** enforced by M1-T03; they remain deferred (see §12.3).
+- Enforcement is validated by negative fixtures that must fail lint and positive fixtures that must pass lint, executed with Node built-ins.
 - Original Gate 0: unchanged, NOT READY (4/35).
-- Implementation evidence (2026-10-19): M1-T02 **IMPLEMENTED** — 43/43 TypeScript tests, 56/56 combined tests, `typecheck` exit 0, frozen offline install exit 0. Not VERIFIED/DONE; independent review and acceptance outstanding. See [[09-Implementation/Task-Handoffs/M1-T02]] §14.
+- Implementation evidence (2026-10-19): M1-T02 **IMPLEMENTED** — 43/43 TypeScript tests, 56/56 combined tests, `typecheck` exit 0, frozen offline install exit 0. M1-T03 **IMPLEMENTED** — 28/28 lint tests, 84/84 combined tests, `lint`/`format:check`/`typecheck` exit 0, frozen offline install exit 0, `git diff --check` exit 0. Not VERIFIED/DONE; independent review and acceptance outstanding. See [[09-Implementation/Task-Handoffs/M1-T02]] §14 and [[09-Implementation/Task-Handoffs/M1-T03]] §§13–14.
+
+### 12.3 Enforcement scope and deferred ADR-005 checks
+
+M1-T03 enforces only the import edges listed in §12.2. ADR-005 section 14 additionally mandates resolved-graph checks (aliases, package exports, barrels, type imports, full literal-dynamic coverage and NestJS DI/provider graphs) and negative architecture fixtures. Those checks are **not yet implemented** and are not claimed. No existing task ID currently owns them: M1-T25 (CI: lint, typecheck, unit, migration test, build) does not define architecture-graph or DI-cycle checks. They must be added to the backlog in a future revision under new task IDs, without renumbering existing IDs, and remain unauthorized until Gate 0 and a specific exception allow them. See [[09-Implementation/Task-Handoffs/M1-T03]] §14 for the full enforced-versus-deferred matrix.

@@ -41,24 +41,24 @@ Technology:
 
 Phase: PLANNING
 
-Active Implementation Milestone: M1 — Platform foundation (M1-T01 and M1-T02 effective)
+Active Implementation Milestone: M1 — Platform foundation (M1-T01, M1-T02 and M1-T03 effective)
 
-Active Implementation Task: M1-T02 — TypeScript strict configuration (IMPLEMENTED — independent review pending)
+Active Implementation Task: M1-T03 — shared ESLint, Prettier and import boundaries (IMPLEMENTED — independent review pending)
 
-Next Implementation Action: obtain independent review and final Project Owner acceptance of M1-T01 and M1-T02. M1-T03 and every later task remain BLOCKED and unauthorized. Do not start M1-T03 or any later task.
+Next Implementation Action: obtain independent review and final Project Owner acceptance of M1-T01, M1-T02 and M1-T03. M1-T04 and every later task remain BLOCKED and unauthorized.
 
 M0-T05 planning deliverable: DONE — transitioned IMPLEMENTED → VERIFIED → DONE on 2026-10-19. Project Owner accepted the final Revision 3 ACCEPT review, approved ADR-005 and explicitly authorized task closure. Verification and acceptance evidence: [[PROGRESS-LOG#M0-T05 approval evidence]]. This completes a planning document only, not application implementation.
 
 M0-T03: DONE — ADR-003 Revision 1 APPROVED by Project Owner after final readiness review ACCEPT. M0-T12: DONE — ADR Index and Decision Log accepted and verified. Evidence: [[PROGRESS-LOG#ADR-003-and-M0-T12-approval-evidence]]. G0-03, G0-06 and G0-24 are satisfied; ADR-005/G0-05 remains satisfied.
 
-Foundation Development Gate Revision 1 is APPROVED and **ACTIVE (M1-T01 only)**. M1-T01 is **IMPLEMENTED** (verified locally; independent review and acceptance pending). [[09-Implementation/Task-Handoffs/M1-T01]] is AUTHORIZED. Node v24.22.0 / pnpm 12.14.0 verified, `git check-ignore` positive/negative checks pass, Gitleaks v8.30.0 full-history and working-tree scans are clean (redacted), and a docs-only baseline commit (`b1d26ab`) established the pre-code baseline on branch `chore/m1-t01-workspace`. Evidence: [[PROGRESS-LOG]]. The separate **M1-T02-only exception is APPROVED and EFFECTIVE** (Owner waived the M1-T01-acceptance precondition); M1-T02 is **IMPLEMENTED** with 43/43 TypeScript tests, 56/56 combined tests, `typecheck` exit 0 and frozen offline install exit 0. See [[09-Implementation/Foundation-Development-Gate]] §11 and [[09-Implementation/Task-Handoffs/M1-T02]].
+Foundation Development Gate Revision 1 is APPROVED and **ACTIVE for M1-T01**, with separate **EFFECTIVE** task-specific exceptions for M1-T02 (§11) and M1-T03 (§12). M1-T01 is **IMPLEMENTED** (verified locally; independent review and acceptance pending). [[09-Implementation/Task-Handoffs/M1-T01]] is AUTHORIZED. Node v24.22.0 / pnpm 12.14.0 verified, `git check-ignore` positive/negative checks pass, Gitleaks v8.30.0 full-history and working-tree scans are clean (redacted), and a docs-only baseline commit (`b1d26ab`) established the pre-code baseline on branch `chore/m1-t01-workspace`. Evidence: [[PROGRESS-LOG]]. The separate **M1-T02-only exception is EFFECTIVE** (Owner waived the M1-T01-acceptance precondition); M1-T02 is **IMPLEMENTED** with 43/43 TypeScript tests, 56/56 combined tests, `typecheck` exit 0 and frozen offline install exit 0. See [[09-Implementation/Foundation-Development-Gate]] §11 and [[09-Implementation/Task-Handoffs/M1-T02]]. The separate **M1-T03-only exception is EFFECTIVE** (2026-10-19) with Owner-approved pins in §12.1 and boundary mapping in §12.2; M1-T03 is **IMPLEMENTED** with 28/28 lint tests (static and literal dynamic imports), 84/84 combined tests, `lint`/`format:check`/`typecheck` exit 0, frozen offline install exit 0 and `git diff --check` exit 0. Resolved-graph and NestJS DI/provider-graph checks are deferred to a future task ID (none exists today). See [[09-Implementation/Task-Handoffs/M1-T03]].
 
-Current implementation task: M1-T02 — TypeScript strict configuration (IMPLEMENTED, authorized 2026-10-19)
+Current implementation task: M1-T03 — shared ESLint, Prettier and import-boundary enforcement (IMPLEMENTED, authorized 2026-10-19)
 
-The M1-T01 scope deviation is explicitly accepted: `pmOnFail: ignore` was added to `pnpm-workspace.yaml` because pnpm 12.14.0 resolves the `packageManager` field as a config dependency, which broke the approved offline/frozen commands. Project Owner acceptance recorded 2026-10-19 in [[09-Implementation/M1-T01-Scope-Proposal]] §9 and [[PROGRESS-LOG]]. M1-T02 adds only the exact `typescript@6.0.3` root devDependency.
+The M1-T01 scope deviation is explicitly accepted: `pmOnFail: ignore` was added to `pnpm-workspace.yaml` because pnpm 12.14.0 resolves the `packageManager` field as a config dependency, which broke the approved offline/frozen commands. Project Owner acceptance recorded 2026-10-19 in [[09-Implementation/M1-T01-Scope-Proposal]] §9 and [[PROGRESS-LOG]]. M1-T02 added the exact `typescript@6.0.3` root devDependency; M1-T03 adds only the six approved lint/format devDependencies at exact pins.
 
 Implementation permission:
-APPROVED — M1-T01 and M1-T02 effective and IMPLEMENTED. No M1-T03+ task is authorized.
+APPROVED — M1-T01, M1-T02 and M1-T03 effective and IMPLEMENTED. No M1-T04+ task is authorized.
 
 ## Milestone Overview
 
@@ -97,11 +97,11 @@ counts alone. Use verified task and feature evidence.
 
 ## Current Blockers
 
-- Full Gate 0 remains NOT READY (4/35). ADR-001, ADR-002, ADR-004 and downstream business policies remain pending; the M1-T01 gate is ACTIVE and the M1-T02 exception is EFFECTIVE.
+- Full Gate 0 remains NOT READY (4/35). ADR-001, ADR-002, ADR-004 and downstream business policies remain pending; the M1-T01 gate is ACTIVE and the M1-T02/M1-T03 exceptions are EFFECTIVE.
 - Database design review pending
 - API contract review pending
 - UI/UX specification review pending
-- Development environment initialized for M1-T01/M1-T02 only (private pnpm workspace + strict TypeScript config); no application runtime, ORM or service is initialized
+- Development environment initialized for M1-T01/M1-T02/M1-T03 only (private pnpm workspace, strict TypeScript config and shared lint/format/boundary rules); no application runtime, ORM or service is initialized
 
 ## Important Business Rules
 

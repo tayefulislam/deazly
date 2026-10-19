@@ -132,3 +132,5 @@ Open decisions: ADR-001 auth mechanism and cookie details; M0-T06 role vocabular
 - Project Owner approval/date: APPROVED, 2026-10-19.
 - G0-03 / G0-24: SATISFIED; checklist evidence recorded.
 - Foundation gate approval is separate; the gate is approved but inactive. Git/toolchain verification and M1-T01 execution permission remain pending.
+
+> **Historical clarification (2026-10-19, appended — approved decision text above unchanged).** This line records the position at ADR-003 approval time. Subsequently the Foundation Development Gate was activated for M1-T01, a narrowly scoped section 11 exception was made effective for M1-T02, and both tasks reached IMPLEMENTED pending independent review. This clarification records later status only; it does not modify, reinterpret or supersede the approved ADR-003 decision.

@@ -9,7 +9,7 @@ created: 2026-10-19
 > **Documentation:** planning-complete with defined gaps.
 > **Implementation:** zero lines of application code.
 > **Production:** explicitly not ready.
-> Only G0-03, G0-05, G0-06 and G0-24 are checked, each with linked evidence (4 of 35). Every other checkbox remains unchecked. The approved Foundation Development Gate is ACTIVE for M1-T01, and a separate M1-T02 exception (Foundation Development Gate §11) is EFFECTIVE for M1-T02 only; full Gate 0 remains NOT READY. Checking a box requires linked evidence, not intent.
+> Only G0-03, G0-05, G0-06 and G0-24 are checked, each with linked evidence (4 of 35). Every other checkbox remains unchecked. The approved Foundation Development Gate is ACTIVE for M1-T01, and separate task-specific exceptions are EFFECTIVE for M1-T02 (Foundation Development Gate §11) and M1-T03 (§12); M1-T01, M1-T02 and M1-T03 are IMPLEMENTED pending independent review. Full Gate 0 remains NOT READY. Checking a box requires linked evidence, not intent.
 
 ## Related documents
 - [[00-START-HERE]]
@@ -30,7 +30,7 @@ created: 2026-10-19
 
 ## 0. How to use this checklist
 
-- **Gate 0** must be fully green before implementation, except that approved Foundation Development Gate Revision 1 may authorize M1-T01 alone after all of its activation prerequisites are verified, and the separate §11 exception authorizes M1-T02 alone. These exceptions do not change Gate 0 status or authorize any other task.
+- **Gate 0** must be fully green before implementation, except that approved Foundation Development Gate Revision 1 may authorize M1-T01 alone after all of its activation prerequisites are verified, and the separate §11 and §12 exceptions authorize M1-T02 and M1-T03 respectively. These exceptions do not change Gate 0 status or authorize any other task.
 - Each later gate maps to a milestone in [[09-Implementation/Milestones]].
 - A box may only be checked when the evidence column has a link to a test run, document, or PR.
 - Partial completion is recorded as partial, never as complete.
@@ -295,10 +295,10 @@ flowchart TD
 3. Publish the RBAC matrix and reconcile role names.
 4. Reconcile design tokens and the canonical route map.
 5. Complete the missing data objects, prioritizing identity, cart, discounts, translations, media, and COD approval.
-6. Sign off Gate 0 before general M1 work. M1-T01 and M1-T02 alone may proceed only under their narrowly approved Foundation Development Gate exceptions and recorded handoff/execution approvals.
+6. Sign off Gate 0 before general M1 work. M1-T01, M1-T02 and M1-T03 alone may proceed only under their narrowly approved Foundation Development Gate exceptions and recorded handoff/execution approvals.
 
-**Do not start implementation before Gate 0 sign-off, except M1-T01 (activated Foundation Development Gate) and M1-T02 (§11 exception).** Doing other work would require guessing unresolved rules, which `AGENTS.md` §4 forbids.
+**Do not start implementation before Gate 0 sign-off, except M1-T01 (activated Foundation Development Gate), M1-T02 (§11 exception) and M1-T03 (§12 exception).** Doing other work would require guessing unresolved rules, which `AGENTS.md` §4 forbids.
 
 ## Gate 0 status after documentation reconciliation
 
-**NOT READY:** G0-03 (approved ADR-003 topology), G0-05 (approved ADR-005 boundaries), G0-06 (accepted ADR index/log) and G0-24 (finance placement) are satisfied (4/35); 31 requirements remain outstanding. The approved Foundation Development Gate is **ACTIVE for M1-T01** and the §11 exception is EFFECTIVE for **M1-T02**; neither completes Gate 0. Review [[09-Implementation/Milestone-Reconciliation]], [[09-Implementation/Task-Status-Policy]], [[05-Architecture/ADRs/ADR-005-Module-Boundaries]], and [[09-Implementation/Feature-Coverage-Gaps]].
+**NOT READY:** G0-03 (approved ADR-003 topology), G0-05 (approved ADR-005 boundaries), G0-06 (accepted ADR index/log) and G0-24 (finance placement) are satisfied (4/35); 31 requirements remain outstanding. The approved Foundation Development Gate is **ACTIVE for M1-T01** and the §11 and §12 exceptions are EFFECTIVE for **M1-T02** and **M1-T03** respectively; none completes Gate 0. Review [[09-Implementation/Milestone-Reconciliation]], [[09-Implementation/Task-Status-Policy]], [[05-Architecture/ADRs/ADR-005-Module-Boundaries]], and [[09-Implementation/Feature-Coverage-Gaps]].
